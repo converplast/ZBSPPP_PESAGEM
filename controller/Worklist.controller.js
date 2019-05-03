@@ -52,31 +52,31 @@ sap.ui.define([
 			this.setModel(oViewModel, "worklistView");
 //debugger;
 			
-			this._oOrdem = this.getView().byId("ordem");
-			this._oPallet = this.getView().byId("pallet");
-			this._oNre = this.getView().byId("txtNRE")
-			this._oBtnPesagem = this.getView().byId("btnPesagem");
-			this._oBtnRedefinirTara = this.getView().byId("btnRedefinirTara");
-			this._oBtnCancelar = this.getView().byId("btnCancelar");
-			this._oBtnSalvar = this.getView().byId("btnSalvar");
-			this._oTotPesagem = this.getView().byId("totPesagem");
-			this._oTotPesoBruto = this.getView().byId("totPesoBruto");
-			this._oTotPesoLiquido = this.getView().byId("totPesoLiquido");
-			this._oTotQtd = this.getView().byId("totQtd");
-			this._oTotQtdTotal = this.getView().byId("totQtdTotal");
-			this._oBtnNovaPesagem = this.getView().byId("btnNovaPesagem");
-			this._oBtnDesmembPalete = this.getView().byId("btnDesmembPalete");
-			this._oBtnPesarDiferenca = this.getView().byId("btnPesarDiferenca");
-			this._oBtnFinalizarPallet = this.getView().byId("btnFinalizarPallet");
-			this._oBtnRomaneio = this.getView().byId("btnRomaneio");
-			this._oBtnFormularioA4 = this.getView().byId("btnFormularioA4");
-			this._oBtnFichaPallet = this.getView().byId("btnFichaPallet");
-			this._oBtnImprimirEtiquetas = this.getView().byId("btnImprimirEtiquetas");
-			this._oTara = this.getView().byId("tara");
-			this._oTxtPesoPallet = this.getView().byId("txtPesoPallet");
+			this._oOrdem = function(){ return this.getView().byId("ordem"); };
+			this._oPallet = function(){ return this.getView().byId("pallet"); };
+			this._oNre = function(){ return this.getView().byId("txtNRE") };
+			this._oBtnPesagem = function(){ return this.getView().byId("btnPesagem"); };
+			this._oBtnRedefinirTara = function(){ return this.getView().byId("btnRedefinirTara"); };
+			this._oBtnCancelar = function(){ return this.getView().byId("btnCancelar"); };
+			this._oBtnSalvar = function(){ return this.getView().byId("btnSalvar"); };
+			this._oTotPesagem = function(){ return this.getView().byId("totPesagem"); };
+			this._oTotPesoBruto = function(){ return this.getView().byId("totPesoBruto"); };
+			this._oTotPesoLiquido = function(){ return this.getView().byId("totPesoLiquido"); };
+			this._oTotQtd = function(){ return this.getView().byId("totQtd"); };
+			this._oTotQtdTotal = function(){ return this.getView().byId("totQtdTotal"); };
+			this._oBtnNovaPesagem = function(){ return this.getView().byId("btnNovaPesagem") };
+			this._oBtnDesmembPalete = function(){ return this.getView().byId("btnDesmembPalete"); };
+			this._oBtnPesarDiferenca = function(){ return this.getView().byId("btnPesarDiferenca"); };
+			this._oBtnFinalizarPallet = function(){ return this.getView().byId("btnFinalizarPallet"); };
+			this._oBtnRomaneio = function(){ return this.getView().byId("btnRomaneio"); };
+			this._oBtnFormularioA4 = function(){ return this.getView().byId("btnFormularioA4"); };
+			this._oBtnFichaPallet = function(){ return this.getView().byId("btnFichaPallet"); };
+			this._oBtnImprimirEtiquetas = function(){ return this.getView().byId("btnImprimirEtiquetas"); };
+			this._oTara = function(){ return this.getView().byId("tara"); };
+			this._oTxtPesoPallet = function(){ return this.getView().byId("txtPesoPallet"); };
 			
-			this._oTara.setEnabled(true);
-			this._oTxtPesoPallet.setEnabled(false);
+			this._oTara().setEnabled(true);
+			this._oTxtPesoPallet().setEnabled(false);
 
 			this._fPesoTotal = 0;
 			this._fOldOrdem = "";
@@ -107,8 +107,8 @@ sap.ui.define([
 			//this._oPrinterHandler = new PrinterHandler(this);
 			$(window).bind('beforeunload', function (e) {
 				//$( window ).unload(function() {
-				var sOrdem = that._oOrdem.getValue();
-				var sPallet = that._oPallet.getValue();
+				var sOrdem = that._oOrdem().getValue();
+				var sPallet = that._oPallet().getValue();
 				that._validaLockTicket(sOrdem, sPallet);
 
 			});
@@ -140,8 +140,8 @@ sap.ui.define([
 			}
 			sap.ui.getCore().byId("backBtn").attachPress(this, function (oEvent) {
 				//oEvent.preventDefault();
-				var sOrdem = this._oOrdem.getValue();
-				var sPallet = this._oPallet.getValue();
+				var sOrdem = this._oOrdem().getValue();
+				var sPallet = this._oPallet().getValue();
 
 				this._validaLockTicket(sOrdem, sPallet);
 			}.bind(this));
@@ -192,12 +192,12 @@ sap.ui.define([
 		},
 
 		handleEnableButtonPesagem: function (oControlEvent) {
-			var tara = this._oTara.getValue();
+			var tara = this._oTara().getValue();
 
 			if (tara != "") {
-				this._oBtnPesagem.setEnabled(true);
+				this._oBtnPesagem().setEnabled(true);
 			} else {
-				this._oBtnPesagem.setEnabled(false);
+				this._oBtnPesagem().setEnabled(false);
 			}
 		},
 
@@ -209,9 +209,9 @@ sap.ui.define([
 			var aItensPesagem = [];
 			var that = this;
 
-			var sOrdem = this._oOrdem.getValue();
-			var sPallet = this._oPallet.getValue();
-			var sTara = this._oTara.getValue();
+			var sOrdem = this._oOrdem().getValue();
+			var sPallet = this._oPallet().getValue();
+			var sTara = this._oTara().getValue();
 
 			if (sTara === "") {
 				this.messageAlert(that.getResourceBundle().getText("messagePreenchimentoTara"));
@@ -349,9 +349,9 @@ sap.ui.define([
 						var aItensPesagem = [];
 						//var that = this;
 
-						var sOrdem = that._oOrdem.getValue();
-						var sPallet = that._oPallet.getValue();
-						var sTara = that._oTara.getValue();
+						var sOrdem = that._oOrdem().getValue();
+						var sPallet = that._oPallet().getValue();
+						var sTara = that._oTara().getValue();
 
 						that._validaLockTicket(sOrdem, sPallet);
 
@@ -464,9 +464,9 @@ sap.ui.define([
 
 			var that = this;
 
-			var sOrdem = this._oOrdem.getValue();
-			var sPallet = this._oPallet.getValue();
-			var sTara = this._oTara.getValue();
+			var sOrdem = this._oOrdem().getValue();
+			var sPallet = this._oPallet().getValue();
+			var sTara = this._oTara().getValue();
 
 			var oHeaderPesagem = this.getView().getModel("headerPesagem").getData();
 
@@ -505,24 +505,24 @@ sap.ui.define([
 							that._recuperarDadosOrdem(that._sOrdem, that._sPallet);
 
 							that.messageToastAlert(that.getResourceBundle().getText("labelAlertSalvar"));
-							that._oBtnRedefinirTara.setVisible(false);
-							that._oBtnCancelar.setVisible(false);
-							that._oBtnSalvar.setVisible(false);
-							that._oBtnNovaPesagem.setVisible(true);
-							that._oBtnFinalizarPallet.setVisible(false);
-							that._oBtnDesmembPalete.setVisible(false);
-							that._oBtnPesarDiferenca.setVisible(false);
-							that._oBtnPesagem.setEnabled(false);
-							that._oBtnRomaneio.setVisible(false);
-							that._oBtnFormularioA4.setVisible(false);
-							that._oBtnFichaPallet.setVisible(true);
-							that._oBtnImprimirEtiquetas.setVisible(true);
+							that._oBtnRedefinirTara().setVisible(false);
+							that._oBtnCancelar().setVisible(false);
+							that._oBtnSalvar().setVisible(false);
+							that._oBtnNovaPesagem().setVisible(true);
+							that._oBtnFinalizarPallet().setVisible(false);
+							that._oBtnDesmembPalete().setVisible(false);
+							that._oBtnPesarDiferenca().setVisible(false);
+							that._oBtnPesagem().setEnabled(false);
+							that._oBtnRomaneio().setVisible(false);
+							that._oBtnFormularioA4().setVisible(false);
+							that._oBtnFichaPallet().setVisible(true);
+							that._oBtnImprimirEtiquetas().setVisible(true);
 							if (that._oDialogPesoPallet) {
 								that._oDialogPesoPallet.close();
 							}
 							
-							this._oTara.setEnabled(false);
-							this._oTxtPesoPallet.setEnabled(true);
+							this._oTara().setEnabled(false);
+							this._oTxtPesoPallet().setEnabled(true);
 						}
 					}
 				});
@@ -554,23 +554,23 @@ sap.ui.define([
 							that._recuperarDadosOrdem(that._sOrdem, that._sPallet);
 
 							that.messageToastAlert(that.getResourceBundle().getText("labelAlertSalvar"));
-							/*that._oBtnRedefinirTara.setVisible(false);
-				            	 that._oBtnCancelar.setVisible(false);
-				            	 that._oBtnSalvar.setVisible(false);
-				            	 that._oBtnNovaPesagem.setVisible(true);
-				            	 that._oBtnFinalizarPallet.setVisible(false);
-				            	 that._oBtnDesmembPalete.setVisible(false); 
-				            	 that._oBtnPesarDiferenca.setVisible(false); 
-				            	 that._oBtnPesagem.setEnabled(false);
-				            	 that._oBtnRomaneio.setVisible(true);
-				            	 that._oBtnFormularioA4.setVisible(true);
-				            	 that._oBtnFichaPallet.setVisible(true);
-				            	 that._oBtnImprimirEtiquetas.setVisible(true);*/
+							/*that._oBtnRedefinirTara().setVisible(false);
+				            	 that._oBtnCancelar().setVisible(false);
+				            	 that._oBtnSalvar().setVisible(false);
+				            	 that._oBtnNovaPesagem().setVisible(true);
+				            	 that._oBtnFinalizarPallet().setVisible(false);
+				            	 that._oBtnDesmembPalete().setVisible(false); 
+				            	 that._oBtnPesarDiferenca().setVisible(false); 
+				            	 that._oBtnPesagem().setEnabled(false);
+				            	 that._oBtnRomaneio().setVisible(true);
+				            	 that._oBtnFormularioA4().setVisible(true);
+				            	 that._oBtnFichaPallet().setVisible(true);
+				            	 that._oBtnImprimirEtiquetas().setVisible(true);*/
 							if (that._oDialogPesoPallet) {
 								that._oDialogPesoPallet.close();
 							}
-							this._oTara.setEnabled(false);
-							this._oTxtPesoPallet.setEnabled(true);
+							this._oTara().setEnabled(false);
+							this._oTxtPesoPallet().setEnabled(true);
 						}
 					},
 					error: function (err) {
@@ -596,9 +596,9 @@ sap.ui.define([
 			var aItensPesagem = [];
 			var that = this;
 
-			var sOrdem = this._oOrdem.getValue();
-			var sPallet = this._oPallet.getValue();
-			var sTara = this._oTara.getValue();
+			var sOrdem = this._oOrdem().getValue();
+			var sPallet = this._oPallet().getValue();
+			var sTara = this._oTara().getValue();
 
 			var oHeaderPesagem = this.getView().getModel("headerPesagem").getData();
 
@@ -624,20 +624,20 @@ sap.ui.define([
 				success: function (oDataPesagem, oResponsePesagem) {
 
 					that.messageToastAlert(that.getResourceBundle().getText("labelAlertPesTot"));
-					that._oBtnRedefinirTara.setVisible(false);
-					that._oBtnCancelar.setVisible(false);
-					that._oBtnSalvar.setVisible(false);
-					that._oBtnNovaPesagem.setVisible(true);
-					that._oBtnPesagem.setEnabled(false);
-					that._oBtnRomaneio.setVisible(true);
-					that._oBtnFormularioA4.setVisible(true);
-					that._oBtnFichaPallet.setVisible(true);
-					that._oBtnImprimirEtiquetas.setVisible(true);
-					that._oBtnFinalizarPallet.setVisible(true);
-					that._oBtnDesmembPalete.setVisible(false);
-					that._oBtnPesarDiferenca.setVisible(false);
-					that._oTxtPesoPallet.setEnabled(false);
-					that._oTara.setEnabled(false);
+					that._oBtnRedefinirTara().setVisible(false);
+					that._oBtnCancelar().setVisible(false);
+					that._oBtnSalvar().setVisible(false);
+					that._oBtnNovaPesagem().setVisible(true);
+					that._oBtnPesagem().setEnabled(false);
+					that._oBtnRomaneio().setVisible(true);
+					that._oBtnFormularioA4().setVisible(true);
+					that._oBtnFichaPallet().setVisible(true);
+					that._oBtnImprimirEtiquetas().setVisible(true);
+					that._oBtnFinalizarPallet().setVisible(true);
+					that._oBtnDesmembPalete().setVisible(false);
+					that._oBtnPesarDiferenca().setVisible(false);
+					that._oTxtPesoPallet().setEnabled(false);
+					that._oTara().setEnabled(false);
 				}
 			});
 
@@ -750,7 +750,7 @@ sap.ui.define([
 			var aFilters = [];
 			var oModel = this.getView().getModel();
 
-			aFilters.push(new Filter("Aufnr", FilterOperator.EQ, this._oOrdem.getValue()));
+			aFilters.push(new Filter("Aufnr", FilterOperator.EQ, this._oOrdem().getValue()));
 			aFilters.push(new Filter("Pallet", FilterOperator.EQ, this._sPallet));
 			aFilters.push(new Filter("Nre", FilterOperator.EQ, fNre));
 			aFilters.push(new Filter("TicketOrigem", FilterOperator.EQ, this._sTicketOrigem));
@@ -784,8 +784,8 @@ sap.ui.define([
 		onHandleNovaPesagem: function () {
 
 			var that = this;
-			var sOrdem = that._oOrdem.getValue();
-			var sPallet = that._oPallet.getValue();
+			var sOrdem = that._oOrdem().getValue();
+			var sPallet = that._oPallet().getValue();
 
 			var dialog = new Dialog({
 				title: this.getResourceBundle().getText("titleConfirm"),
@@ -821,8 +821,8 @@ sap.ui.define([
 		_NovoPalletDifDesmemb: function () {
 
 			var that = this;
-			var sOrdem = that._oOrdem.getValue();
-			var sPallet = that._oPallet.getValue();
+			var sOrdem = that._oOrdem().getValue();
+			var sPallet = that._oPallet().getValue();
 
 			if (sPallet) {
 				//Se o PALLET estiver preenchido obrigatóriamente a opção precisa ser SIM
@@ -915,7 +915,7 @@ sap.ui.define([
 					if ((that._sOrdem === aOrdem[1]) || (aOrdem[1] === "")) {
 						var vSwitch = sap.ui.getCore().byId("swtTipoPesagem");
 						var valorSwitch = vSwitch.getState();
-						var vPesoAtual = this._oTxtPesoAtual.getValue();
+						var vPesoAtual = this._oTxtPesoAtual().getValue();
 
 						if (valorSwitch === false && (vPesoAtual === "" || vPesoAtual == 0)) {
 							that.messageAlert(that.getResourceBundle().getText("alertPesoVazio"));
@@ -1050,17 +1050,17 @@ sap.ui.define([
 			if (oModelHeaderPesagem) {
 				var oModelHeaderPesagemData = oModelHeaderPesagem.getData();
 				if (!oModelHeaderPesagemData.Pallet) {
-					this._oBtnNovaPesagem.setVisible(true);
-					this._oBtnDesmembPalete.setVisible(true);
-					this._oBtnPesarDiferenca.setVisible(true);
+					this._oBtnNovaPesagem().setVisible(true);
+					this._oBtnDesmembPalete().setVisible(true);
+					this._oBtnPesarDiferenca().setVisible(true);
 				}
 			} else {
-				this._oBtnNovaPesagem.setVisible(true);
-				this._oBtnDesmembPalete.setVisible(true);
-				this._oBtnPesarDiferenca.setVisible(true);
+				this._oBtnNovaPesagem().setVisible(true);
+				this._oBtnDesmembPalete().setVisible(true);
+				this._oBtnPesarDiferenca().setVisible(true);
 			}
 
-			//this._oTxtPesoTotal.setValue("");
+			//this._oTxtPesoTotal().setValue("");
 		},
 
 		handlePdfFormularioA4: function () {
@@ -1069,7 +1069,7 @@ sap.ui.define([
 			var aFilters = [];
 			var oModel = this.getView().getModel();
 
-			aFilters.push(new Filter("Aufnr", FilterOperator.EQ, this._oOrdem.getValue()));
+			aFilters.push(new Filter("Aufnr", FilterOperator.EQ, this._oOrdem().getValue()));
 			aFilters.push(new Filter("Pallet", FilterOperator.EQ, this._sPallet));
 
 			oModel.read("/ZSTPP_FORMULARIO_A4_URLSet", {
@@ -1113,7 +1113,7 @@ sap.ui.define([
 			var aFilters = [];
 			var oModel = this.getView().getModel();
 
-			aFilters.push(new Filter("Aufnr", FilterOperator.EQ, this._oOrdem.getValue()));
+			aFilters.push(new Filter("Aufnr", FilterOperator.EQ, this._oOrdem().getValue()));
 			aFilters.push(new Filter("Pallet", FilterOperator.EQ, this._sPallet));
 
 			oModel.read("/ZSTPP_FICHA_PALLET_URLSet", {
@@ -1159,7 +1159,7 @@ sap.ui.define([
 			//				setTimeout(function(){ 
 			var aFilter = [];
 
-			aFilter.push(new Filter("Aufnr", FilterOperator.EQ, that._oOrdem.getValue()));
+			aFilter.push(new Filter("Aufnr", FilterOperator.EQ, that._oOrdem().getValue()));
 			aFilter.push(new Filter("Pallet", FilterOperator.EQ, that._sPallet));
 
 			that._imprimirEtiquetaPacote(aFilter);
@@ -1172,7 +1172,7 @@ sap.ui.define([
 			var aFilters = [];
 			var oModel = this.getView().getModel();
 
-			aFilters.push(new Filter("Aufnr", FilterOperator.EQ, this._oOrdem.getValue()));
+			aFilters.push(new Filter("Aufnr", FilterOperator.EQ, this._oOrdem().getValue()));
 			aFilters.push(new Filter("Pallet", FilterOperator.EQ, this._sPallet));
 			debugger
 			oModel.read("/ZSTPP_PACKING_LIST_URLSet", {
@@ -1382,8 +1382,8 @@ sap.ui.define([
 
 		_limpaCamposCodBarras: function () {
 			this._oTxtCodBarras.setValue("");
-			this._oTxtPesoAtual.setValue("");
-			this._oTxtPesoTotal.setValue("");
+			this._oTxtPesoAtual().setValue("");
+			this._oTxtPesoTotal().setValue("");
 			this._oBtnSalvarPesagem.setVisible(false);
 			this.getView().setModel(null, "itensPesagemCache");
 		},
@@ -1420,16 +1420,16 @@ sap.ui.define([
 
 							that._fPesoTotal += fTotalPesoKg;
 
-							if (that._oTxtPesoAtual) {
-								that._oTxtPesoAtual.setValue(fTotalPesoKg.toFixed(3));
-								//that._oTxtPesoTotal.setValue(that._fPesoTotal.toFixed(3));
+							if (that._oTxtPesoAtual()) {
+								that._oTxtPesoAtual().setValue(fTotalPesoKg.toFixed(3));
+								//that._oTxtPesoTotal().setValue(that._fPesoTotal.toFixed(3));
 							}
 						}
 					} else if (parseFloat(that._sPesoBalancaAtual) == 0) {
 						debugger;
-						if (that._oTxtPesoAtual) {
-							that._oTxtPesoAtual.setValue(fTotalPesoKg.toFixed(3));
-							//that._oTxtPesoTotal.setValue(that._fPesoTotal.toFixed(3));
+						if (that._oTxtPesoAtual()) {
+							that._oTxtPesoAtual().setValue(fTotalPesoKg.toFixed(3));
+							//that._oTxtPesoTotal().setValue(that._fPesoTotal.toFixed(3));
 						}
 					}
 
@@ -1445,16 +1445,16 @@ sap.ui.define([
 
 		_somarPesoTotal: function (fPesoAtual) {
 
-			//var fPesoAtual = this._oTxtPesoAtual.getValue();
+			//var fPesoAtual = this._oTxtPesoAtual().getValue();
 
-			if (this._oTxtPesoTotal.getValue() === "") {
+			if (this._oTxtPesoTotal().getValue() === "") {
 				var fPesoTotal = 0;
 			} else {
-				var fPesoTotal = this._oTxtPesoTotal.getValue();
+				var fPesoTotal = this._oTxtPesoTotal().getValue();
 			}
 
 			var fPesoTotalSoma = parseFloat(fPesoAtual) + parseFloat(fPesoTotal);
-			this._oTxtPesoTotal.setValue(fPesoTotalSoma.toFixed(3));
+			this._oTxtPesoTotal().setValue(fPesoTotalSoma.toFixed(3));
 		},
 
 		_openLeituraQuantidade: function () {
@@ -1481,10 +1481,10 @@ sap.ui.define([
 			jQuery.sap.syncStyleClass("sapUiSizeCompact", this.getView(), this._oDialogQtd);
 			this._oDialogQtd.open();
 
-			this._oTxtPesoAtual = sap.ui.getCore().byId("txtPesoAtualQtd");
+			this._oTxtPesoAtual = function(){ return sap.ui.getCore().byId("txtPesoAtualQtd"); };
 			//this._oBtnSalvarPesagem = sap.ui.getCore().byId("btnSalvarPesagemQtd");
 
-			this._oTxtPesoAtual.setValue(that._sPesoBalancaAtual);
+			this._oTxtPesoAtual().setValue(that._sPesoBalancaAtual);
 
 		},
 
@@ -1494,11 +1494,11 @@ sap.ui.define([
 			var valorSwitch = vSwitch.getState();
 
 			if (valorSwitch === true) {
-				this._oTxtPesoAtual.setEnabled(false);
+				this._oTxtPesoAtual().setEnabled(false);
 			} else {
-				this._oTxtPesoAtual.setValue("");
+				this._oTxtPesoAtual().setValue("");
 				this._sPesoBalancaAtual = "";
-				this._oTxtPesoAtual.setEnabled(true);
+				this._oTxtPesoAtual().setEnabled(true);
 			}
 		},
 
@@ -1508,11 +1508,11 @@ sap.ui.define([
 			var valorSwitch = vSwitch.getState();
 
 			if (valorSwitch === true) {
-				this._oTxtPesoAtual.setEnabled(false);
+				this._oTxtPesoAtual().setEnabled(false);
 			} else {
-				this._oTxtPesoAtual.setValue("");
+				this._oTxtPesoAtual().setValue("");
 				this._sPesoBalancaAtual = "";
-				this._oTxtPesoAtual.setEnabled(true);
+				this._oTxtPesoAtual().setEnabled(true);
 			}
 		},
 
@@ -1534,11 +1534,11 @@ sap.ui.define([
 			this._oDialogCodBarras.open();
 
 			this._oTxtCodBarras = sap.ui.getCore().byId("txtCodigoBarras");
-			this._oTxtPesoAtual = sap.ui.getCore().byId("txtPesoAtual");
-			this._oTxtPesoTotal = sap.ui.getCore().byId("txtPesoTotal");
+			this._oTxtPesoAtual = function(){ return sap.ui.getCore().byId("txtPesoAtual"); };
+			this._oTxtPesoTotal = function(){ return sap.ui.getCore().byId("txtPesoTotal"); };
 			this._oBtnSalvarPesagem = sap.ui.getCore().byId("btnSalvarPesagem");
 
-			this._oTxtPesoAtual.setValue(that._sPesoBalancaAtual);
+			this._oTxtPesoAtual().setValue(that._sPesoBalancaAtual);
 
 		},
 
@@ -1633,7 +1633,7 @@ sap.ui.define([
 			var oModelItensPesagem = new JSONModel([oItensPesagem]);
 			this.getView().setModel(oModelItensPesagem, "itensPesagem");
 
-			this._oBtnRedefinirTara.setVisible(false);
+			this._oBtnRedefinirTara().setVisible(false);
 
 			//this.messageToastAlert(this.getResourceBundle().getText("labelAlertSalvar"));
 
@@ -1652,21 +1652,21 @@ sap.ui.define([
 			this._sDescNre = "";
 			this._sTicketOrigem = "";
 
-			this._oBtnNovaPesagem.setVisible(true);
-			this._oBtnFinalizarPallet.setVisible(false);
-			this._oBtnDesmembPalete.setVisible(true);
-			this._oBtnPesarDiferenca.setVisible(true);
-			this._oBtnSalvar.setVisible(false);
-			this._oBtnCancelar.setVisible(false);
-			this._oBtnPesagem.setEnabled(true);
-			this._oBtnRomaneio.setVisible(false);
-			this._oBtnFormularioA4.setVisible(false);
-			this._oBtnFichaPallet.setVisible(false);
-			this._oBtnImprimirEtiquetas.setVisible(false);
-			this._oNre.setEnabled(true);
+			this._oBtnNovaPesagem().setVisible(true);
+			this._oBtnFinalizarPallet().setVisible(false);
+			this._oBtnDesmembPalete().setVisible(true);
+			this._oBtnPesarDiferenca().setVisible(true);
+			this._oBtnSalvar().setVisible(false);
+			this._oBtnCancelar().setVisible(false);
+			this._oBtnPesagem().setEnabled(true);
+			this._oBtnRomaneio().setVisible(false);
+			this._oBtnFormularioA4().setVisible(false);
+			this._oBtnFichaPallet().setVisible(false);
+			this._oBtnImprimirEtiquetas().setVisible(false);
+			this._oNre().setEnabled(true);
 
-			this._oTara.setEnabled(true);
-			this._oBtnRedefinirTara.setEnabled(true);
+			this._oTara().setEnabled(true);
+			this._oBtnRedefinirTara().setEnabled(true);
 			
 			this._sColunaQtdTotal = 0;
 
@@ -1705,18 +1705,18 @@ sap.ui.define([
 						that._recuperarDadosOrdem(that._sOrdem, that._sPallet);
 
 						that.messageToastAlert(that.getResourceBundle().getText("labelAlertSalvar"));
-						/* that._oBtnRedefinirTara.setVisible(false);
-				            	 that._oBtnCancelar.setVisible(false);
-				            	 that._oBtnSalvar.setVisible(false);
-				            	 that._oBtnNovaPesagem.setVisible(true);
-				            	 that._oBtnFinalizarPallet.setVisible(false);
-				            	 that._oBtnDesmembPalete.setVisible(false); 
-				            	 that._oBtnPesarDiferenca.setVisible(false); 
-				            	 that._oBtnPesagem.setEnabled(false);
-				            	 that._oBtnRomaneio.setVisible(true);
-				            	 that._oBtnFormularioA4.setVisible(true);
-				            	 that._oBtnFichaPallet.setVisible(true);
-				            	 that._oBtnImprimirEtiquetas.setVisible(true);*/
+						/* that._oBtnRedefinirTara().setVisible(false);
+				            	 that._oBtnCancelar().setVisible(false);
+				            	 that._oBtnSalvar().setVisible(false);
+				            	 that._oBtnNovaPesagem().setVisible(true);
+				            	 that._oBtnFinalizarPallet().setVisible(false);
+				            	 that._oBtnDesmembPalete().setVisible(false); 
+				            	 that._oBtnPesarDiferenca().setVisible(false); 
+				            	 that._oBtnPesagem().setEnabled(false);
+				            	 that._oBtnRomaneio().setVisible(true);
+				            	 that._oBtnFormularioA4().setVisible(true);
+				            	 that._oBtnFichaPallet().setVisible(true);
+				            	 that._oBtnImprimirEtiquetas().setVisible(true);*/
 						if (that._oDialogPesoPallet) {
 							that._oDialogPesoPallet.close();
 						}
@@ -1783,15 +1783,15 @@ sap.ui.define([
 						//habilita ou nao os campos para edição
 						var peso = parseFloat(that._sPesoPallet);
 						if (peso > 0 ){
-							that._oTxtPesoPallet.setEnabled(false);
+							that._oTxtPesoPallet().setEnabled(false);
 						} else {
-							that._oTxtPesoPallet.setEnabled(true);
+							that._oTxtPesoPallet().setEnabled(true);
 						}
 						
 						if (that._sEfetivada == ""){
-							that._oTara.setEnabled(true);
+							that._oTara().setEnabled(true);
 						}else{
-							that._oTara.setEnabled(false);
+							that._oTara().setEnabled(false);
 						}
 					}
 				}
@@ -1836,8 +1836,8 @@ sap.ui.define([
 						var oModelHeaderPesagem = new JSONModel(new HeaderPesagem(oDataPesagem.results[0]));
 						that.getView().setModel(oModelHeaderPesagem, "headerPesagem");
 						that._recuperaItensDesmemb(that._fOldPallet, that._sEfetivada, that._sPesoPallet, that._sDifdesmemb);
-						this._oTara.setEnabled(true);
-						this._oTxtPesoPallet.setEnabled(true);
+						this._oTara().setEnabled(true);
+						this._oTxtPesoPallet().setEnabled(true);
 					}
 				}
 			});
@@ -1912,7 +1912,7 @@ sap.ui.define([
 			var url = this.getUrlOdata();
 			var oModel = new sap.ui.model.odata.ODataModel(url, true);
 			var filter = [];
-			var fTara = this._oTara.getValue();
+			var fTara = this._oTara().getValue();
 			var that = this;
 
 			//				if(fTara === ""){
@@ -1925,8 +1925,8 @@ sap.ui.define([
 				fTara = 0;
 			}
 
-			if (this._oOrdem.getValue() != "" && this._oPallet.getValue() != "") {
-				this._buscaItensPesagem(this._oOrdem.getValue(), this._oPallet.getValue(), 0, 0);
+			if (this._oOrdem().getValue() != "" && this._oPallet().getValue() != "") {
+				this._buscaItensPesagem(this._oOrdem().getValue(), this._oPallet().getValue(), 0, 0);
 			} else {
 				filter.push(new Filter("Aufnr", FilterOperator.EQ, sOrdem));
 				filter.push(new Filter("Tara", FilterOperator.EQ, fTara));
@@ -1960,28 +1960,28 @@ sap.ui.define([
 							that._oBtnSalvarPesagem.setVisible(true);
 							that._buscaItensPesagem(that._sOrdem, that._sPallet, 0, 0);
 
-							that._oTara.setEnabled(true);
-							that._oBtnRedefinirTara.setEnabled(true);
+							that._oTara().setEnabled(true);
+							that._oBtnRedefinirTara().setEnabled(true);
 						} else {
 							that._oDialogCodBarras.close();
 							that._openLeituraQuantidade();
 							that._oTimeoutPesoQtd = setInterval(function () {
 								that._lerPesoBalanca();
 							}, 1000);
-							that._oTara.setEnabled(true);
-							//that._oBtnRedefinirTara.setEnabled(true);
+							that._oTara().setEnabled(true);
+							//that._oBtnRedefinirTara().setEnabled(true);
 							//ADD CASSIO - VERIFICAR DE COLOCAR A BUSCA POR ITENS NESSE PONTO
-							that._oBtnRedefinirTara.setVisible(true);
-							that._oBtnCancelar.setVisible(true);
-							that._oBtnSalvar.setVisible(true);
-							that._oBtnNovaPesagem.setVisible(true);
-							that._oBtnFinalizarPallet.setVisible(false);
-							that._oBtnDesmembPalete.setVisible(false);
-							that._oBtnPesarDiferenca.setVisible(false);
-							that._oBtnRomaneio.setVisible(false);
-							that._oBtnFormularioA4.setVisible(false);
-							that._oBtnFichaPallet.setVisible(false);
-							that._oBtnImprimirEtiquetas.setVisible(true);
+							that._oBtnRedefinirTara().setVisible(true);
+							that._oBtnCancelar().setVisible(true);
+							that._oBtnSalvar().setVisible(true);
+							that._oBtnNovaPesagem().setVisible(true);
+							that._oBtnFinalizarPallet().setVisible(false);
+							that._oBtnDesmembPalete().setVisible(false);
+							that._oBtnPesarDiferenca().setVisible(false);
+							that._oBtnRomaneio().setVisible(false);
+							that._oBtnFormularioA4().setVisible(false);
+							that._oBtnFichaPallet().setVisible(false);
+							that._oBtnImprimirEtiquetas().setVisible(true);
 							//FIM CASSIO
 						}
 
@@ -2031,8 +2031,8 @@ sap.ui.define([
 			var aFilterEtiqueta = [];
 			
 			//debugger;
-			if (this._oTxtPesoAtual) {
-				var fPesoAtual = this._oTxtPesoAtual.getValue();
+			if (this._oTxtPesoAtual()) {
+				var fPesoAtual = this._oTxtPesoAtual().getValue();
 
 				if (fPesoAtual === "") {
 					fPesoAtual = 0;
@@ -2042,8 +2042,8 @@ sap.ui.define([
 			}
 
 			//INI ADD CASSIO 14/02/2018
-			if (this._oTxtPesoTotal) {
-				var fPesoTotalSoma = this._oTxtPesoTotal.getValue();
+			if (this._oTxtPesoTotal()) {
+				var fPesoTotalSoma = this._oTxtPesoTotal().getValue();
 
 				if (fPesoTotalSoma === "") {
 					fPesoTotalSoma = 0;
@@ -2074,7 +2074,7 @@ sap.ui.define([
 					fPesoTotalSoma = sap.ui.getCore().byId("txtPesoAtualQtd").getValue();
 
 			if (fTara == 0) {
-				fTara = this._oTara.getValue();
+				fTara = this._oTara().getValue();
 			}
 
 			aFilter.push(new Filter("PesoBruto", FilterOperator.EQ, fPesoAtual));
@@ -2100,18 +2100,18 @@ sap.ui.define([
 					that.setFree();
 					//debugger;
 					if (oDataPesagem.results.length > 0) {
-						//that._oTara.setEnabled(false);
-						that._oBtnRedefinirTara.setVisible(true);
-						that._oBtnCancelar.setVisible(true);
-						that._oBtnSalvar.setVisible(true);
-						that._oBtnNovaPesagem.setVisible(true);
-						that._oBtnFinalizarPallet.setVisible(false);
-						that._oBtnDesmembPalete.setVisible(false);
-						that._oBtnPesarDiferenca.setVisible(false);
-						that._oBtnRomaneio.setVisible(false);
-						that._oBtnFormularioA4.setVisible(false);
-						that._oBtnFichaPallet.setVisible(false);
-						that._oBtnImprimirEtiquetas.setVisible(true);
+						//that._oTara().setEnabled(false);
+						that._oBtnRedefinirTara().setVisible(true);
+						that._oBtnCancelar().setVisible(true);
+						that._oBtnSalvar().setVisible(true);
+						that._oBtnNovaPesagem().setVisible(true);
+						that._oBtnFinalizarPallet().setVisible(false);
+						that._oBtnDesmembPalete().setVisible(false);
+						that._oBtnPesarDiferenca().setVisible(false);
+						that._oBtnRomaneio().setVisible(false);
+						that._oBtnFormularioA4().setVisible(false);
+						that._oBtnFichaPallet().setVisible(false);
+						that._oBtnImprimirEtiquetas().setVisible(true);
 						//debugger;
 						$.each(oDataPesagem.results, function (index, item) {
 							aItensPesagem.push(new ItensPesagem(item));
@@ -2342,7 +2342,7 @@ sap.ui.define([
 			var fQuantTotal = 0;
 			
 			if (fPesoTotal === undefined) 
-				var fPesoTotal = this._oTxtPesoTotal.getValue();
+				var fPesoTotal = this._oTxtPesoTotal().getValue();
 
 			aFilter.push(new Filter("Aufnr", FilterOperator.EQ, sOrdem));
 			aFilter.push(new Filter("Pallet", FilterOperator.EQ, sPallet));
@@ -2367,18 +2367,18 @@ sap.ui.define([
 				success: function (oDataPesagem, oResponsePesagem) {
 					//debugger;
 					if (oDataPesagem.results.length > 0) {
-						//that._oTara.setEnabled(false);
-						that._oBtnRedefinirTara.setVisible(true);
-						that._oBtnCancelar.setVisible(true);
-						that._oBtnSalvar.setVisible(true);
-						that._oBtnNovaPesagem.setVisible(true);
-						that._oBtnFinalizarPallet.setVisible(false);
-						that._oBtnDesmembPalete.setVisible(false);
-						that._oBtnPesarDiferenca.setVisible(false);
-						that._oBtnRomaneio.setVisible(false);
-						that._oBtnFormularioA4.setVisible(false);
-						that._oBtnFichaPallet.setVisible(false);
-						that._oBtnImprimirEtiquetas.setVisible(true);
+						//that._oTara().setEnabled(false);
+						that._oBtnRedefinirTara().setVisible(true);
+						that._oBtnCancelar().setVisible(true);
+						that._oBtnSalvar().setVisible(true);
+						that._oBtnNovaPesagem().setVisible(true);
+						that._oBtnFinalizarPallet().setVisible(false);
+						that._oBtnDesmembPalete().setVisible(false);
+						that._oBtnPesarDiferenca().setVisible(false);
+						that._oBtnRomaneio().setVisible(false);
+						that._oBtnFormularioA4().setVisible(false);
+						that._oBtnFichaPallet().setVisible(false);
+						that._oBtnImprimirEtiquetas().setVisible(true);
 
 						$.each(oDataPesagem.results, function (index, item) {
 							aItensPesagem.push(new ItensPesagem(item));
@@ -2432,13 +2432,13 @@ sap.ui.define([
 			oModelTotalPesagem.TotalBobinasPesadas = fTotBobinasPesadas;
 
 			//				if(fTotPacotesPesados === parseFloat(this._sTotPacotes)){
-			//					this._oBtnPesagem.setEnabled(false);		            				 
+			//					this._oBtnPesagem().setEnabled(false);		            				 
 			//				}else{
-			//					this._oBtnPesagem.setEnabled(true);
+			//					this._oBtnPesagem().setEnabled(true);
 			//				}
 
 			if (fTotBobinasPesadas === parseFloat(this._sTotPacotes)) {
-				this._oBtnPesagem.setEnabled(false);
+				this._oBtnPesagem().setEnabled(false);
 
 				if (this.leituraQtdDialog) {
 					this.leituraQtdDialog.close();
@@ -2449,7 +2449,7 @@ sap.ui.define([
 				}
 
 			} else {
-				this._oBtnPesagem.setEnabled(true);
+				this._oBtnPesagem().setEnabled(true);
 			}
 
 			var oModelTotaisPesagem = new JSONModel(new TotaisPesagem(oModelTotalPesagem));
@@ -2480,19 +2480,19 @@ sap.ui.define([
 						that.getView().setModel(oModelItensPesagem, "itensPesagem");
 
 						that._calculaTotais();
-						that._oBtnRedefinirTara.setVisible(false);
-						that._oNre.setEnabled(true);
-						that._oBtnCancelar.setVisible(false);
-						that._oBtnSalvar.setVisible(true);
-						that._oBtnNovaPesagem.setVisible(true);
-						that._oBtnFinalizarPallet.setVisible(false);
-						that._oBtnDesmembPalete.setVisible(false);
-						that._oBtnPesarDiferenca.setVisible(false);
-						that._oBtnPesagem.setEnabled(false);
-						that._oBtnRomaneio.setVisible(false);
-						that._oBtnFormularioA4.setVisible(false);
-						that._oBtnFichaPallet.setVisible(false);
-						that._oBtnImprimirEtiquetas.setVisible(false);
+						that._oBtnRedefinirTara().setVisible(false);
+						that._oNre().setEnabled(true);
+						that._oBtnCancelar().setVisible(false);
+						that._oBtnSalvar().setVisible(true);
+						that._oBtnNovaPesagem().setVisible(true);
+						that._oBtnFinalizarPallet().setVisible(false);
+						that._oBtnDesmembPalete().setVisible(false);
+						that._oBtnPesarDiferenca().setVisible(false);
+						that._oBtnPesagem().setEnabled(false);
+						that._oBtnRomaneio().setVisible(false);
+						that._oBtnFormularioA4().setVisible(false);
+						that._oBtnFichaPallet().setVisible(false);
+						that._oBtnImprimirEtiquetas().setVisible(false);
 
 						//that.resizableDialog.close();
 					} else {
@@ -2527,19 +2527,19 @@ sap.ui.define([
 						that.getView().setModel(oModelItensPesagem, "itensPesagem");
 
 						that._calculaTotais();
-						that._oBtnRedefinirTara.setVisible(false);
-						that._oNre.setEnabled(true);
-						that._oBtnCancelar.setVisible(false);
-						that._oBtnSalvar.setVisible(true);
-						that._oBtnNovaPesagem.setVisible(true);
-						that._oBtnFinalizarPallet.setVisible(false);
-						that._oBtnDesmembPalete.setVisible(false);
-						that._oBtnPesarDiferenca.setVisible(false);
-						that._oBtnPesagem.setEnabled(false);
-						that._oBtnRomaneio.setVisible(false);
-						that._oBtnFormularioA4.setVisible(false);
-						that._oBtnFichaPallet.setVisible(false);
-						that._oBtnImprimirEtiquetas.setVisible(false);
+						that._oBtnRedefinirTara().setVisible(false);
+						that._oNre().setEnabled(true);
+						that._oBtnCancelar().setVisible(false);
+						that._oBtnSalvar().setVisible(true);
+						that._oBtnNovaPesagem().setVisible(true);
+						that._oBtnFinalizarPallet().setVisible(false);
+						that._oBtnDesmembPalete().setVisible(false);
+						that._oBtnPesarDiferenca().setVisible(false);
+						that._oBtnPesagem().setEnabled(false);
+						that._oBtnRomaneio().setVisible(false);
+						that._oBtnFormularioA4().setVisible(false);
+						that._oBtnFichaPallet().setVisible(false);
+						that._oBtnImprimirEtiquetas().setVisible(false);
 
 						//that.resizableDialog.close();
 					} else {
@@ -2576,57 +2576,57 @@ sap.ui.define([
 
 						if (sEfetivada === "") {
 							if (!that._sDifdesmemb) {
-								that._oBtnRedefinirTara.setVisible(true);
-								that._oBtnCancelar.setVisible(false);
-								that._oBtnSalvar.setVisible(true);
-								that._oBtnNovaPesagem.setVisible(true);
-								that._oBtnFinalizarPallet.setVisible(false);
-								that._oBtnDesmembPalete.setVisible(false);
-								that._oBtnPesarDiferenca.setVisible(false);
-								that._oBtnPesagem.setEnabled(true);
-								that._oBtnRomaneio.setVisible(false);
-								that._oBtnFormularioA4.setVisible(false);
-								that._oBtnFichaPallet.setVisible(false);
-								that._oBtnImprimirEtiquetas.setVisible(true);
-								that._oNre.setEnabled(true);
+								that._oBtnRedefinirTara().setVisible(true);
+								that._oBtnCancelar().setVisible(false);
+								that._oBtnSalvar().setVisible(true);
+								that._oBtnNovaPesagem().setVisible(true);
+								that._oBtnFinalizarPallet().setVisible(false);
+								that._oBtnDesmembPalete().setVisible(false);
+								that._oBtnPesarDiferenca().setVisible(false);
+								that._oBtnPesagem().setEnabled(true);
+								that._oBtnRomaneio().setVisible(false);
+								that._oBtnFormularioA4().setVisible(false);
+								that._oBtnFichaPallet().setVisible(false);
+								that._oBtnImprimirEtiquetas().setVisible(true);
+								that._oNre().setEnabled(true);
 								that._calculaTotais();
 							} else {
-								that._oBtnRedefinirTara.setVisible(false);
-								that._oBtnCancelar.setVisible(false);
-								that._oBtnSalvar.setVisible(true);
-								that._oBtnNovaPesagem.setVisible(true);
-								that._oBtnFinalizarPallet.setVisible(false);
-								that._oBtnDesmembPalete.setVisible(false);
-								that._oBtnPesarDiferenca.setVisible(false);
-								that._oBtnPesagem.setEnabled(false);
-								that._oBtnRomaneio.setVisible(false);
-								that._oBtnFormularioA4.setVisible(false);
-								that._oBtnFichaPallet.setVisible(false);
-								that._oBtnImprimirEtiquetas.setVisible(false);
-								that._oNre.setEnabled(true);
+								that._oBtnRedefinirTara().setVisible(false);
+								that._oBtnCancelar().setVisible(false);
+								that._oBtnSalvar().setVisible(true);
+								that._oBtnNovaPesagem().setVisible(true);
+								that._oBtnFinalizarPallet().setVisible(false);
+								that._oBtnDesmembPalete().setVisible(false);
+								that._oBtnPesarDiferenca().setVisible(false);
+								that._oBtnPesagem().setEnabled(false);
+								that._oBtnRomaneio().setVisible(false);
+								that._oBtnFormularioA4().setVisible(false);
+								that._oBtnFichaPallet().setVisible(false);
+								that._oBtnImprimirEtiquetas().setVisible(false);
+								that._oNre().setEnabled(true);
 								that._calculaTotais();
 							}
 						} else {
 
 							that._calculaTotais();
-							that._oNre.setEnabled(false);
-							that._oBtnRedefinirTara.setVisible(false);
-							that._oBtnCancelar.setVisible(false);
-							that._oBtnSalvar.setVisible(false);
-							that._oBtnNovaPesagem.setVisible(true);
-							that._oBtnFinalizarPallet.setVisible(true);
-							that._oBtnDesmembPalete.setVisible(false);
-							that._oBtnPesarDiferenca.setVisible(false);
-							that._oBtnPesagem.setEnabled(false);
+							that._oNre().setEnabled(false);
+							that._oBtnRedefinirTara().setVisible(false);
+							that._oBtnCancelar().setVisible(false);
+							that._oBtnSalvar().setVisible(false);
+							that._oBtnNovaPesagem().setVisible(true);
+							that._oBtnFinalizarPallet().setVisible(true);
+							that._oBtnDesmembPalete().setVisible(false);
+							that._oBtnPesarDiferenca().setVisible(false);
+							that._oBtnPesagem().setEnabled(false);
 							if (sPesoPallet > 0) {
-								that._oBtnRomaneio.setVisible(true);
-								that._oBtnFormularioA4.setVisible(true);
+								that._oBtnRomaneio().setVisible(true);
+								that._oBtnFormularioA4().setVisible(true);
 							} else {
-								that._oBtnRomaneio.setVisible(false);
-								that._oBtnFormularioA4.setVisible(false);
+								that._oBtnRomaneio().setVisible(false);
+								that._oBtnFormularioA4().setVisible(false);
 							}
-							that._oBtnFichaPallet.setVisible(true);
-							that._oBtnImprimirEtiquetas.setVisible(true);
+							that._oBtnFichaPallet().setVisible(true);
+							that._oBtnImprimirEtiquetas().setVisible(true);
 						}
 
 						//that.resizableDialog.close();
