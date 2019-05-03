@@ -4,7 +4,7 @@
 		xmlns:l="sap.ui.layout"
 		xmlns:f="sap.ui.layout.form">
 		
-	<Dialog afterClose="onHandleAfterCloseDialogCod" showHeader="false" contentWidth="49%">
+	<Dialog id='CodBarrasDialog' afterClose="onHandleAfterCloseDialogCod" showHeader="false" contentWidth="49%">
 		<content>
 			<VBox id="boxTableLog" fitContainer="true">
 				<l:Grid defaultSpan="L12 M12 S12" >

@@ -1520,7 +1520,12 @@ sap.ui.define([
 			var that = this;
 
 			if (!this._oDialogCodBarras) {
-				this._oDialogCodBarras = sap.ui.xmlfragment("agile.pesagembobina.view.CodBarrasDialog", this);
+                if (!sap.ui.getCore().byId("txtCodigoBarras")){
+                    this._oDialogCodBarras = sap.ui.xmlfragment("agile.pesagembobina.view.CodBarrasDialog", this);
+                }
+                else{
+                    this._oDialogCodBarras = sap.ui.getCore().byId('CodBarrasDialog')
+                }
 			}
 
 			this._oDialogCodBarras.setModel(this.getView().getModel());
