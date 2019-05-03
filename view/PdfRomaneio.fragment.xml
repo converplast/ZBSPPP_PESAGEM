@@ -1,0 +1,35 @@
+<core:FragmentDefinition
+		xmlns="sap.m"
+		xmlns:core="sap.ui.core"
+		xmlns:l="sap.ui.layout">
+		
+	<Dialog afterClose="handleAfterCloseDialogPdfRomaneio" contentWidth="100%" contentHeight="100%">
+		<content>
+			
+			<VBox id="boxTable" class="pdf" fitContainer="true" >
+				<PDFViewer source="{pdf>/url}" title="{pdf>/title}" height="100%" width="100%" ></PDFViewer>
+			</VBox>
+			
+<!-- 			<ScrollContainer -->
+<!-- 				height="100%" -->
+<!-- 				width="100%" -->
+<!-- 				horizontal="true" -->
+<!-- 				vertical="true"> -->
+<!-- 				<FlexBox direction="Column" renderType="Div" class="sapUiSmallMargin"> -->
+					
+<!-- 					<PDFViewer source="{pdf>/url}" title="Romaneio" height="600px" > -->
+<!-- 						<layoutData> -->
+<!-- 							<FlexItemData growFactor="1" baseSize="100%" /> -->
+<!-- 						</layoutData> -->
+<!-- 					</PDFViewer> -->
+					
+<!-- 				</FlexBox> -->
+<!-- 			</ScrollContainer> -->
+		
+        </content>
+        <endButton>
+            <Button text="Fechar"  icon="sap-icon://sys-cancel" press="handleDialogRomaneioCloseButton" />
+        </endButton>
+	</Dialog>
+		
+</core:FragmentDefinition>

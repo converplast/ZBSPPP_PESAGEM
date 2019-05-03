@@ -1,0 +1,21 @@
+<mvc:View
+	controllerName="agile.pesagembobina.controller.PdfFichaPallet"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:l="sap.ui.layout"
+	xmlns:semantic="sap.m.semantic">
+
+	<Page
+		id="page"
+        semanticRuleSet="Optimized"
+		title="{i18n>worklistViewTitle}"
+		showNavButton="true"
+		navButtonPress="onNavBack">
+		
+		<content>
+			<VBox id="pdfBox" class="pdf" fitContainer="true"></VBox>	 
+		</content>
+
+	</Page>
+
+</mvc:View>

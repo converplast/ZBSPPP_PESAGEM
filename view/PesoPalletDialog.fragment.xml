@@ -1,0 +1,33 @@
+<core:FragmentDefinition
+		xmlns="sap.m"
+		xmlns:core="sap.ui.core"
+		xmlns:l="sap.ui.layout">
+		
+	<Dialog>
+		<content>
+			<VBox id="boxTotalPallet" fitContainer="true">
+				<l:Grid defaultSpan="L12 M12 S12" >
+					<l:content>
+						
+						<VBox>
+							<Label text="Peso Total do Pallet" />
+	                  		<Input id="txtPesoPallet" type="Number" value="{headerPesagem>/Peso_Pallet}" submit="onHandleSalvarPesagem" />
+    					    <layoutData>
+   				           		<l:GridData span="L12 M12 S12"  />
+    			          	</layoutData>
+              	  		</VBox>
+              	  		
+					</l:content>
+				</l:Grid>
+			</VBox>
+		
+        </content>
+        <beginButton>
+            <Button text="Confirmar" icon="sap-icon://accept" press="onHandleSalvarPesagem" />
+        </beginButton>
+        <endButton>
+            <Button text="Cancelar"  icon="sap-icon://sys-cancel" press="onHandleDialogPesoPalletCancelButton" />
+        </endButton>
+	</Dialog>
+		
+</core:FragmentDefinition>

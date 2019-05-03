@@ -1,0 +1,117 @@
+<core:FragmentDefinition
+		xmlns="sap.m"
+		xmlns:core="sap.ui.core"
+		xmlns:l="sap.ui.layout"
+		xmlns:f="sap.ui.layout.form">
+		
+	<Dialog afterClose="onHandleAfterCloseDialogQtd"
+			title="Leitura de Pacotes por Quantidade"
+			draggable="true">
+		<content>
+			<VBox id="boxQtdDialog" fitContainer="true">
+				<l:Grid defaultSpan="L12 M12 S12" >
+					<l:content>
+						<FlexBox>
+						<VBox class="sapUiSmallMarginEnd" width="49%">
+							<Label text="Quantidade" />
+	                  		<Input id="txtQtd" submit="handleSubmitQtd" />
+    					    <layoutData>
+   				           		<l:GridData span="L6 M6 S6"  />
+    			          	</layoutData>
+              	  		</VBox>
+              	  		<VBox>
+							<Label text="" />
+	                  		<Button text="Realizar Leitura" press="handleSubmitQtd" />
+    					    
+              	  		</VBox>
+              	  		</FlexBox>
+              	  		
+              	  		<!--<VBox>
+							<Label text="Número de Bobinas" />
+	                  		<Input id="txtQtdBobinas" submit="handleSubmitQtd" />
+    					    <layoutData>
+   				           		<l:GridData span="L6 M6 S6"  />
+    			          	</layoutData>
+              	  		</VBox>
+              	  		-->
+              	  		
+              	  		<VBox>
+							<Label text="Quantidade Total" />
+	                  		<Input id="txtQtdTotal" enabled="false" 
+	                  		value="{
+	                  		path: 'bobinasTotalPacote>/qtdBobinaAcumulado'
+	                  		}"
+	                  		/>
+    					    <layoutData>
+   				           		<l:GridData span="L6 M6 S6"  />
+    			          	</layoutData>
+              	  		</VBox>
+						
+						<VBox>
+							<Label text="Peso Atual" />
+	                  		<Input id="txtPesoAtualQtd" enabled="false"/>
+    					    <layoutData>
+   				           		<l:GridData span="L6 M6 S6"  />
+    			          	</layoutData>
+              	  		</VBox>
+              	  		
+              	  		<VBox>
+							<Label text="Bobinas Pesadas / Pacote" visible="false" />
+	                  		<Text id="txtBobinasTotalPacote" text="{bobinasTotalPacote>/qtdBobinasPesadas}" visible="false"/>
+    					    <layoutData>
+   				           		<l:GridData span="L6 M6 S6"  />
+    			          	</layoutData>
+              	  		</VBox>
+              	  		
+              	  		<f:Form maxContainerCols="2" editable="true">
+
+              	  			<f:layout>
+		                      <f:ResponsiveGridLayout
+						       labelSpanXL="4"
+						       labelSpanL="4"
+						       labelSpanM="4"
+						       labelSpanS="4"
+						       adjustLabelSpan="false"
+						       emptySpanXL="0"
+						       emptySpanL="0"
+						       emptySpanM="0"
+						       emptySpanS="0"
+						       columnsXL="1"
+						       columnsL="1"
+						       columnsM="1"
+						       singleContainerFullSize="false" />
+		                    </f:layout>
+              	  		
+							<f:formContainers>
+		                    	<f:FormContainer>
+			            	  		  <f:FormElement label="Leitura automática">
+			                            <f:fields>
+			                              <Switch id="swtTipoPesagemQtd" state="true" customTextOn="Sim" customTextOff="Não" change="onChangeSwitchCodBarrasQtd" />
+			                            </f:fields>
+			                          </f:FormElement>
+		                    	</f:FormContainer>
+		                    </f:formContainers>
+						</f:Form>
+              	  		
+					</l:content>
+				</l:Grid>
+			</VBox>
+		
+        </content>
+        
+        <buttons>
+        	<Button id="btnFinalizarPacoteQtd" text="Finalizar Pacote" 
+        	icon="sap-icon://accept" press="handleFinalizarPacoteItemPesagemQtd" 
+        	visible="{= ${bobinasTotalPacote>/qtdBobinasPesadas} > 0 }"
+        	/>
+        	
+        	<Button id="btnSalvarPesagemQtd" text="Salvar" icon="sap-icon://accept" 
+        	press="handleSalvarQtd" 
+        	visible="false"
+        	/>
+        	
+        	<Button text="Fechar"  icon="sap-icon://sys-cancel" press="handleDialogQtdCancelButton" />
+        </buttons>
+	</Dialog>
+		
+</core:FragmentDefinition>

@@ -1,0 +1,90 @@
+<core:FragmentDefinition
+		xmlns="sap.m"
+		xmlns:core="sap.ui.core"
+		xmlns:l="sap.ui.layout"
+		xmlns:f="sap.ui.layout.form">
+		
+	<Dialog afterClose="onHandleAfterCloseDialogCod" showHeader="false" contentWidth="49%">
+		<content>
+			<VBox id="boxTableLog" fitContainer="true">
+				<l:Grid defaultSpan="L12 M12 S12" >
+					<l:content>
+					
+						<VBox>
+							<Label text="" />
+						</VBox>
+
+						<VBox>
+							<Label text="Código de Barras" />
+	                  		<Input id="txtCodigoBarras" submit="handleSubmitCodigoBarras" />
+    					    <layoutData>
+   				           		<l:GridData span="L9 M9 S9" />
+    			          	</layoutData>
+              	  		</VBox>
+              	  		
+              	  		<VBox>
+              	  			<Label text="" />
+	                  		<Button text="Realizar Leitura" press="handleSubmitCodigoBarras" />
+    					    <layoutData>
+   				           		<l:GridData span="L3 M3 S3" />
+    			          	</layoutData>
+              	  		</VBox>
+              	  		
+              	  		<VBox>
+ 							<Label text="Peso Atual" />
+	                  		<Input id="txtPesoAtual" enabled="false"/>         	  		
+	                  		
+   					   		<layoutData>
+   				           		<l:GridData span="L6 M6 S6"  />
+    			          	</layoutData>
+				   		</VBox>
+				   		
+				   		<VBox>
+    			        	<Label text="Peso Total" />
+	                  		<Input id="txtPesoTotal" enabled="false" />
+	                  		
+   					   		<layoutData>
+   				           		<l:GridData span="L6 M6 S6"  />
+    			          	</layoutData>
+				   		</VBox>
+				   		
+				   		<f:Form id="FormNewNomDog" maxContainerCols="2" editable="true">
+
+              	  			<f:layout>
+		                      <f:ResponsiveGridLayout
+						       labelSpanXL="3"
+						       labelSpanL="3"
+						       labelSpanM="3"
+						       labelSpanS="3"
+						       adjustLabelSpan="false"
+						       emptySpanXL="0"
+						       emptySpanL="0"
+						       emptySpanM="0"
+						       emptySpanS="0"
+						       singleContainerFullSize="false" />
+		                    </f:layout>
+              	  		
+							<f:formContainers>
+		                    	<f:FormContainer>
+			            	  		  <f:FormElement label="Ativar balança">
+			                            <f:fields>
+			                              <Switch id="swtTipoPesagem" state="true" customTextOn="Sim" customTextOff="Não" change="onChangeSwitchCodBarras" />
+			                            </f:fields>
+			                          </f:FormElement>
+		                    	</f:FormContainer>
+		                    </f:formContainers>
+						</f:Form>
+					</l:content>
+				</l:Grid>
+			</VBox>
+		
+        </content>
+        <beginButton>
+            <Button id="btnSalvarPesagem" text="Finalizar Pacote" icon="sap-icon://accept" press="handleSalvarItemPesagem" visible="false" />
+        </beginButton>
+        <endButton>
+            <Button text="Cancelar"  icon="sap-icon://sys-cancel" press="handleDialogCodBarrasCancelButton" />
+        </endButton>
+	</Dialog>
+		
+</core:FragmentDefinition>

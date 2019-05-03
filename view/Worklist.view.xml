@@ -1,0 +1,592 @@
+<mvc:View
+	controllerName="agile.pesagembobina.controller.Worklist"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:semantic="sap.m.semantic"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core"
+	xmlns:table="sap.ui.table">
+
+	<semantic:FullscreenPage
+		id="page"
+        semanticRuleSet="Optimized">
+		<semantic:content>
+		<VBox id="boxTableLog" fitContainer="true">
+			<l:Grid defaultSpan="L12 M12 S12" >
+				<l:content>
+      	     		<f:SimpleForm 
+      	     			id="formQualidade"
+		                editable="true" 
+		                layout="ResponsiveGridLayout"
+		                adjustLabelSpan="false" 
+		                class="editableForm"
+		                singleContainerFullSize="false"
+		                columnsL="1">
+		                
+		                <f:layoutData>
+		          	       <l:GridData span="L12 M12 S12" />
+		                </f:layoutData>
+	
+	                	<f:content>
+<!-- 	              	  		<core:Title text="{i18n>titleQualidade}" /> -->
+							<!-- Linha 1 -->
+							<VBox>
+								<Label text="{i18n>ticket}" >
+			                	   	<layoutData>
+		   		            			<l:GridData span="L1 M1 S12" />
+			    		             </layoutData>
+		    	            	</Label>
+		                  		<Input id="pallet" value="{headerPesagem>/Pallet}" enabled="false">
+	    			          		<layoutData>
+	    				           		<l:GridData span="L2 M2 S12"  />
+		    			          	</layoutData>
+	    					    </Input>
+	    					    <layoutData>
+    				           		<l:GridData span="L2 M2 S12"  />
+	    			          	</layoutData>
+	              	  		</VBox>
+							
+	              	  		<VBox>
+								<Label text="{i18n>centro}" >
+			                	   	<layoutData>
+		   		            			<l:GridData span="L1 M1 S12" />
+			    		             </layoutData>
+		    	            	</Label>
+		                  		<Input value="{headerPesagem>/Werks} {headerPesagem>/DescCentro}" enabled="false">
+	    			          		<layoutData>
+	    				           		<l:GridData span="L6 M6 S12"  />
+		    			          	</layoutData>
+	    					    </Input>
+	    					    <layoutData>
+    				           		<l:GridData span="L7 M6 S12"  />
+	    			          	</layoutData>
+	              	  		</VBox>
+	              	  		
+	              	  		<VBox>
+	    			        	<Label text="{i18n>tara}" >
+	                	   			<layoutData>
+	    		            			<l:GridData span="L2 M2 S12" />
+		    		             	</layoutData>
+		    	            	</Label>
+		                  		<Input id="tara" class="money2"  value="{headerPesagem>/Tara}"  >
+	    			          		<layoutData>
+	   				           			<l:GridData span="L2 M4 S12"  />
+		    			          	</layoutData>
+	   					   		</Input>
+	   					   		<layoutData>
+    				           		<l:GridData span="L3 M4 S12"  />
+	    			          	</layoutData>
+   					   		</VBox>
+							<!-- Linha 1 -->
+							
+							<!-- Linha 2 -->
+							<VBox>
+								<Label text="{i18n>ordem}" >
+			                	   	<layoutData>
+		   		            			<l:GridData span="L1 M2 S12" />
+			    		             </layoutData>
+		    	            	</Label>
+		                  		<Input id="ordem" value="{headerPesagem>/Aufnr}" enabled="false">
+	    			          		<layoutData>
+	    				           		<l:GridData span="L2 M4 S12"  />
+		    			          	</layoutData>
+	    					    </Input>
+	    					    
+								<layoutData>
+    				           		<l:GridData span="L2 M4 S12"  />
+	    			          	</layoutData>
+							</VBox>
+							
+							<VBox>
+	    			        	<Label text="{i18n>item}" >
+	                	   			<layoutData>
+	    		            			<l:GridData span="L2 M2 S12" />
+		    		             	</layoutData>
+		    	            	</Label>
+		                  		<Input value="{headerPesagem>/Plnbez}" enabled="false">
+	    			          		<layoutData>
+	   				           			<l:GridData span="L2 M4 S12"  />
+		    			          	</layoutData>
+	   					   		</Input>
+	   					   		<layoutData>
+    				           		<l:GridData span="L5 M4 S12"  />
+	    			          	</layoutData>
+   					   		</VBox>
+   					   		
+   					   		<VBox>
+	   					   		<Label text="{i18n>descricao}" >
+	                	   			<layoutData>
+	    		            			<l:GridData span="L2 M2 S12" />
+		    		             	</layoutData>
+		    	            	</Label>
+		                  		<Input value="{headerPesagem>/Maktx}" enabled="false">
+	    			          		<layoutData>
+	   				           			<l:GridData span="L5 M4 S12"  />
+		    			          	</layoutData>
+	   					   		</Input>
+	   					   		
+   					   			<layoutData>
+    				           		<l:GridData span="L5 M4 S12"  />
+	    			          	</layoutData>
+   					   		</VBox>
+							<!-- /Linha 2 -->
+	
+	
+							<!-- Linha 2 -->
+							<VBox>
+								<Label text="{i18n>cliente}" >
+			                	   	<layoutData>
+		   		            			<l:GridData span="L1 M2 S12" />
+			    		             </layoutData>
+		    	            	</Label>
+		                  		<Input value="{headerPesagem>/Kunnr}" enabled="false">
+	    			          		<layoutData>
+	    				           		<l:GridData span="L2 M4 S12"  />
+		    			          	</layoutData>
+	    					    </Input>
+	    					    
+								<layoutData>
+    				           		<l:GridData span="L2 M4 S12"  />
+	    			          	</layoutData>
+							</VBox>
+							
+							<VBox>
+	    			        	<Label text="{i18n>descricao}" >
+	                	   			<layoutData>
+	    		            			<l:GridData span="L2 M2 S12" />
+		    		             	</layoutData>
+		    	            	</Label>
+		                  		<Input value="{headerPesagem>/DescCliente}" enabled="false">
+	    			          		<layoutData>
+	   				           			<l:GridData span="L2 M4 S12"  />
+		    			          	</layoutData>
+	   					   		</Input>
+	   					   		<layoutData>
+    				           		<l:GridData span="L5 M4 S12"  />
+	    			          	</layoutData>
+   					   		</VBox>
+   					   		
+   					   		<!--<VBox>
+	   					   		<Label text="{i18n>operador}" >
+	                	   			<layoutData>
+	    		            			<l:GridData span="L2 M2 S12" />
+		    		             	</layoutData>
+		    	            	</Label>
+		                  		<Input value="{headerPesagem>/Uname} {headerPesagem>/Useralias}" enabled="false">
+	    			          		<layoutData>
+	   				           			<l:GridData span="L5 M4 S12"  />
+		    			          	</layoutData>
+	   					   		</Input>
+	   					   		
+   					   			<layoutData>
+    				           		<l:GridData span="L5 M4 S12"  />
+	    			          	</layoutData>
+   					   		</VBox> -->
+   					   		
+   					   		<VBox>
+	   					   		<Label text="{i18n>nre}" >
+	                	   			<layoutData>
+	    		            			<l:GridData span="L1 M2 S12" />
+		    		             	</layoutData>
+		    	            	</Label>
+		                  		<Input id="txtNRE" type="Number" value="{headerPesagem>/Nre}" submit="onSubmitNRE">
+	    			          		<layoutData>
+	   				           			<l:GridData span="L5 M4 S12"  />
+		    			          	</layoutData>
+	   					   		</Input>
+	   					   		
+   					   			<layoutData>
+    				           		<l:GridData span="L1 M4 S12"  />
+	    			          	</layoutData>
+   					   		</VBox>   	
+   					   		
+   					   		<VBox>
+	   					   		<Label text="{i18n>desc_nre}" >
+	                	   			<layoutData>
+	    		            			<l:GridData span="L1 M2 S12" />
+		    		             	</layoutData>
+		    	            	</Label>
+		                  		<Input value="{headerPesagem>/DescNre}" enabled="false">
+	    			          		<layoutData>
+	   				           			<l:GridData span="L5 M4 S12"  />
+		    			          	</layoutData>
+	   					   		</Input>
+	   					   		
+   					   			<layoutData>
+    				           		<l:GridData span="L4 M4 S12"  />
+	    			          	</layoutData>
+   					   		</VBox>     					   						   		
+							<!-- /Linha 3 -->
+		
+		
+							<!-- Linha 4 -->
+							<VBox>
+								<Label text="{i18n>novoPallet}" >
+			                	   	<layoutData>
+		   		            			<l:GridData span="L1 M2 S12" />
+			    		             </layoutData>
+		    	            	</Label>
+		                  		<Input value="{headerPesagem>/Nlenr}" enabled="false">
+	    			          		<layoutData>
+	    				           		<l:GridData span="L2 M4 S12"  />
+		    			          	</layoutData>
+	    					    </Input>
+	    					    
+								<layoutData>
+    				           		<l:GridData span="L2 M4 S12"  />
+	    			          	</layoutData>
+							</VBox>
+							
+							<VBox>
+								<Label text="Peso Total do Pallet" />
+		                  		<Input id="txtPesoPallet" type="Number" value="{headerPesagem>/Peso_Pallet}" />
+	    					    <layoutData>
+	   				           		<l:GridData span="L3 M4 S12"  />
+	    			          	</layoutData>
+	              	  		</VBox>
+							
+   					   		<VBox>
+	   					   		<Label text="{i18n>modelo}" >
+	                	   			<layoutData>
+	    		            			<l:GridData span="L2 M2 S12" />
+		    		             	</layoutData>
+		    	            	</Label>
+		                  		<Input value="{headerPesagem>/Modelo}" enabled="false">
+	    			          		<layoutData>
+	   				           			<l:GridData span="L5 M4 S12"  />
+		    			          	</layoutData>
+	   					   		</Input>
+	   					   		
+   					   			<layoutData>
+    				           		<l:GridData span="L3 M4 S12"  />
+	    			          	</layoutData>
+   					   		</VBox>
+   					   		
+<!--    					   		<VBox> -->
+<!-- 								<Label text="" > -->
+<!-- 			                	   	<layoutData> -->
+<!-- 		   		            			<l:GridData span="L1 M1 S12" /> -->
+<!-- 			    		             </layoutData> -->
+<!-- 		    	            	</Label> -->
+<!-- 								<RadioButtonGroup columns="3" width="100%" class="sapUiMediumMarginBottom"> -->
+<!-- 									<buttons> -->
+<!-- 										<RadioButton id="RB1-1" text="Normal"/> -->
+<!-- 										<RadioButton id="RB1-2" text="Reemissão"/> -->
+<!-- 									</buttons> -->
+<!-- 								</RadioButtonGroup> -->
+								
+<!-- 	    					    <layoutData> -->
+<!--     				           		<l:GridData span="L3 M4 S12"  /> -->
+<!-- 	    			          	</layoutData> -->
+<!-- 	              	  		</VBox> -->
+							
+							<VBox>
+								<Label text="" >
+			                	   	<layoutData>
+		   		            			<l:GridData span="L1 M1 S12" />
+			    		             </layoutData>
+		    	            	</Label>
+		    	            	<Button id="btnPesagem" text="Pesagem"
+									press="onHandleOpenPesagem" width="100%"
+									ariaDescribedBy="defaultButtonDescription genericButtonDescription"/>
+								
+	    					    <layoutData>
+    				           		<l:GridData span="L1 M4 S4"  />
+	    			          	</layoutData>
+	              	  		</VBox>
+	              	  		
+	              	  		<VBox>
+								<Label text="" >
+			                	   	<layoutData>
+		   		            			<l:GridData span="L1 M1 S12" />
+			    		             </layoutData>
+		    	            	</Label>
+								<Button id="btnRedefinirTara" text="Redefinir tara"
+									press="handleRedefinirTara" visible="true" enabled="true" width="100%"
+									ariaDescribedBy="defaultButtonDescription genericButtonDescription"/>
+								
+	    					    <layoutData>
+    				           		<l:GridData span="L2 M4 S4"  />
+	    			          	</layoutData>
+	              	  		</VBox>
+	              	  		
+							<VBox>
+								<Label text="" >
+			                	   	<layoutData>
+		   		            			<l:GridData span="L1 M1 S12" />
+			    		             </layoutData>
+		    	            	</Label>
+								<Button id="btnRecuperar" text="Recuperar"
+									press="handleRecuperarPesagem" width="100%"
+									ariaDescribedBy="defaultButtonDescription genericButtonDescription"/>
+								
+	    					    <layoutData>
+    				           		<l:GridData span="L1 M4 S4"  />
+	    			          	</layoutData>
+	              	  		</VBox>
+							<!-- /Linha 4 -->
+
+							<!-- Linha 5 -->
+							<VBox fitContainer="true">
+								<table:Table
+									id="tableItensPesagem"
+									rows="{itensPesagem>/}"
+									selectionMode="Single"
+									selectionBehavior="Row"
+									visibleRowCount="3"
+									visibleRowCountMode="Auto"
+									rowSelectionChange="handleOpenTableActions"
+									sort="Pacote">
+									<table:columns>
+										<table:Column width="9rem">
+											<Label text="{i18n>labelPesoBruto}" />
+											<table:template>
+												<Text text="{itensPesagem>PesoBruto}"/>
+											</table:template>
+										</table:Column>
+										<table:Column width="9rem">
+											<Label text="{i18n>labelTara}" />
+											<table:template>
+												<Text text="{itensPesagem>Tara}"/>
+											</table:template>
+										</table:Column>
+										<table:Column width="9rem">
+											<Label text="{i18n>labelPesoLiquido}" />
+											<table:template>
+												<Text text="{itensPesagem>PesoLiquido}"/>
+											</table:template>
+										</table:Column>
+										<table:Column width="9rem">
+											<Label text="{i18n>labelPacote}" />
+											<table:template>
+												<Text text="{itensPesagem>Pacote}"/>
+											</table:template>
+										</table:Column>
+										<table:Column width="9rem">
+											<Label text="{i18n>labelQuantidade}" />
+											<table:template>
+												<Text text="{itensPesagem>Quant}"/>
+											</table:template>
+										</table:Column>
+										<table:Column width="8rem">
+											<Label text="{i18n>labelUnidade}" />
+											<table:template>
+												<Text text="{itensPesagem>Gmein}"/>
+											</table:template>
+										</table:Column>
+										<table:Column width="9rem">
+											<Label text="{i18n>labelNumBobina}" />
+											<table:template>
+												<Text text="{itensPesagem>QtdeBobinas}"/>
+											</table:template>
+										</table:Column>
+										<table:Column width="9rem">
+											<Label text="{i18n>labelQtdTotal}" />
+											<table:template>
+												<Text text="{itensPesagem>QuantTotal}"/>
+											</table:template>
+										</table:Column>
+									</table:columns>
+								  	<table:footer>
+								  		<Toolbar>
+										<ToolbarSpacer width="3%"/>
+										
+										<Text text="{i18n>qtdPesado}"  />
+										<Text id="totPesagem" text="{totaisPesagem>/TotalBobinasPesadas} - {totaisPesagem>/TotalMaximoPacotes}" />
+								  		
+								  		</Toolbar>
+
+  									</table:footer>
+								</table:Table>
+								
+								<layoutData>
+    				           		<l:GridData span="L12 M12 S12"  />
+	    			          	</layoutData>
+								
+							</VBox>						
+   			       			<!-- /Linha 5 -->
+   			       			
+   			       			
+<!--    			       			{ path: 'MAIN>WERKS', formatter: 'my.Formatter.getName' } -->
+   			       			<!-- Linha 6 -->
+							<VBox>
+								<Label text="{i18n>dtFabricacao}" >
+			                	   	<layoutData>
+		   		            			<l:GridData span="L1 M2 S12" />
+			    		             </layoutData>
+		    	            	</Label>
+		                  		<Input value="{ path: 'headerPesagem>/DtFabr', formatter: '.handleFormataData' }" enabled="false">
+	    			          		<layoutData>
+	    				           		<l:GridData span="L2 M4 S12"  />
+		    			          	</layoutData>
+	    					    </Input>
+	    					    
+								<layoutData>
+    				           		<l:GridData span="L2 M4 S12"  />
+	    			          	</layoutData>
+							</VBox>
+							
+   					   		<VBox>
+	   					   		<Label text="{i18n>dtVal}" >
+	                	   			<layoutData>
+	    		            			<l:GridData span="L2 M2 S12" />
+		    		             	</layoutData>
+		    	            	</Label>
+		                  		<Input value="{ path: 'headerPesagem>/DtVal', formatter: '.handleFormataData' }" enabled="false">
+	    			          		<layoutData>
+	   				           			<l:GridData span="L5 M4 S12"  />
+		    			          	</layoutData>
+	   					   		</Input>
+	   					   		
+   					   			<layoutData>
+    				           		<l:GridData span="L2 M4 S12"  />
+	    			          	</layoutData>
+   					   		</VBox>
+   					   		
+   					   		<VBox>
+	   					   		<Label text="{i18n>totPesoBruto}" >
+	                	   			<layoutData>
+	    		            			<l:GridData span="L2 M2 S12" />
+		    		             	</layoutData>
+		    	            	</Label>
+		                  		<Input id="totPesoBruto" enabled="false" value="{totaisPesagem>/PesoBrutoTotal}">
+	    			          		<layoutData>
+	   				           			<l:GridData span="L5 M4 S12"  />
+		    			          	</layoutData>
+	   					   		</Input>
+	   					   		
+   					   			<layoutData>
+    				           		<l:GridData span="L2 M4 S12"  />
+	    			          	</layoutData>
+   					   		</VBox>
+   					   		
+   					   		<VBox>
+	   					   		<Label text="{i18n>totPesoLiquido}" >
+	                	   			<layoutData>
+	    		            			<l:GridData span="L2 M2 S12" />
+		    		             	</layoutData>
+		    	            	</Label>
+		                  		<Input id="totPesoLiquido" enabled="false" value="{totaisPesagem>/PesoLiquidoTotal}">
+	    			          		<layoutData>
+	   				           			<l:GridData span="L5 M4 S12"  />
+		    			          	</layoutData>
+	   					   		</Input>
+	   					   		
+   					   			<layoutData>
+    				           		<l:GridData span="L2 M4 S12"  />
+	    			          	</layoutData>
+   					   		</VBox>
+   					   		
+   					   		<VBox>
+	   					   		<Label text="{i18n>totQtd}" >
+	                	   			<layoutData>
+	    		            			<l:GridData span="L2 M2 S12" />
+		    		             	</layoutData>
+		    	            	</Label>
+		                  		<Input id="totQtd" enabled="false" value="{totaisPesagem>/QuantidadeTotal}">
+	    			          		<layoutData>
+	   				           			<l:GridData span="L5 M4 S12"  />
+		    			          	</layoutData>
+	   					   		</Input>
+	   					   		
+   					   			<layoutData>
+    				           		<l:GridData span="L2 M4 S12"  />
+	    			          	</layoutData>
+   					   		</VBox>
+   					   		
+   					   		<VBox>
+	   					   		<Label text="{i18n>totQtdTotal}" >
+	                	   			<layoutData>
+	    		            			<l:GridData span="L2 M2 S12" />
+		    		             	</layoutData>
+		    	            	</Label>
+		                  		<Input id="totQtdTotal" enabled="false" value="{totaisPesagem>/TotalGeral}">
+	    			          		<layoutData>
+	   				           			<l:GridData span="L5 M4 S12"  />
+		    			          	</layoutData>
+	   					   		</Input>
+	   					   		
+   					   			<layoutData>
+    				           		<l:GridData span="L2 M4 S12"  />
+	    			          	</layoutData>
+   					   		</VBox>
+							<!-- /Linha 6 -->
+							
+		    			</f:content>
+		    		</f:SimpleForm>
+			
+       			</l:content>
+    		</l:Grid>
+			
+		</VBox>	
+		</semantic:content>
+		<semantic:customFooterContent>
+				<Button id="btnNovaPesagem" 
+						visible="false"
+						text="Nova Pesagem"
+						press="onHandleNovaPesagem"
+						ariaDescribedBy="acceptButtonDescription genericButtonDescription" />
+						
+				<Button id="btnDesmembPalete" 
+						visible="false"
+						text="Desmembrar Pallet"
+						press="onHandleDesmembrarPallet"
+						ariaDescribedBy="acceptButtonDescription genericButtonDescription" />
+						
+				<Button id="btnPesarDiferenca" 
+						visible="false"
+						text="Pesar Diferença Desmembramento"
+						press="onHandlePesarDiferenca"
+						ariaDescribedBy="acceptButtonDescription genericButtonDescription" />									
+		
+				<Button id="btnCancelar"
+						text="Apagar"
+						visible="false"
+						press="onHandleCancelarPesagem"
+						ariaDescribedBy="acceptButtonDescription genericButtonDescription" />
+						
+				<Button id="btnRomaneio"
+						text="Romaneio"
+						visible="false"
+						press="handlePdfRomaneio"
+						ariaDescribedBy="acceptButtonDescription genericButtonDescription" />
+						
+				<Button id="btnFormularioA4"
+						text="Formulário A4"
+						visible="false"
+						press="handlePdfFormularioA4"
+						ariaDescribedBy="acceptButtonDescription genericButtonDescription" />		
+				
+				<Button id="btnFinalizarPallet"
+						text="Finalizar Pallet"
+						visible="false"
+						press="onHandleFinalizarPallet"
+						ariaDescribedBy="acceptButtonDescription genericButtonDescription" />
+										
+				<Button id="btnImprimirEtiquetas"
+						text="Imprimir Etiquetas"
+						visible="false"
+						press="handleImprimirTodasEtiquetas"
+						ariaDescribedBy="acceptButtonDescription genericButtonDescription" />			
+<!-- 				<Button text="Relatório" -->
+<!-- 						press="onPress" -->
+<!-- 						ariaDescribedBy="acceptButtonDescription genericButtonDescription" /> -->
+						
+				<Button id="btnFichaPallet"
+						text="Ficha Pallet"
+						visible="false"
+						press="handlePdfFichaPallet"
+						ariaDescribedBy="acceptButtonDescription genericButtonDescription" />	
+						
+				<Button id="btnSalvar"
+						text="Gravar pesagem"
+						visible="false"
+						press="onHandleSalvarPesagem"
+						ariaDescribedBy="acceptButtonDescription genericButtonDescription" />	
+						
+		</semantic:customFooterContent>
+	
+	</semantic:FullscreenPage>
+
+</mvc:View>
