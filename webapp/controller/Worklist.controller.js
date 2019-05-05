@@ -1472,7 +1472,7 @@ sap.ui.define([
 				this._oDialogQtd.setModel(this.getView().getModel("headerPesagem"),"headerPesagem");
 				this._oDialogQtd.setModel(this.getView().getModel("bobinasTotalPacote"),"bobinasTotalPacote");
 			}
-			catch{
+			catch(e){
 				debugger
 			}
 			
@@ -1999,7 +1999,7 @@ sap.ui.define([
         			if (oMessage)
         				that.messageError(oMessage);
         			
-					} catch {
+					} catch(e) {
 						
 					}
 				}
@@ -2086,7 +2086,7 @@ sap.ui.define([
 
 			try {
 				sap.ui.getCore().byId("btnSalvarPesagemQtd").setVisible(false);	
-			} catch {
+			} catch(e) {
 				
 			}
 			
@@ -2196,7 +2196,7 @@ sap.ui.define([
 									that.showReturnMessage(oParse);
 									try {
 										sap.ui.getCore().byId("btnSalvarPesagemQtd").setVisible(true);	
-									} catch {
+									} catch(e) {
 										
 									}
 									
@@ -2285,7 +2285,7 @@ sap.ui.define([
 			that._prepararSalvarItemPesagem(that._aItensPesagem, that._sOrdemQtd, that._sPalletQtd, that._fQtdeBobinasTotalQtd, that._fTaraTotalQtd, that._fQuantQtd, that._sPesoTotalQtd);
 			try {
 				sap.ui.getCore().byId("btnSalvarPesagemQtd").setVisible(false);	
-			} catch {
+			} catch(e) {
 				
 			}
 			
