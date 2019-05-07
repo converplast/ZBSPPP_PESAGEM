@@ -5,6 +5,7 @@
 		xmlns:f="sap.ui.layout.form">
 		
 	<Dialog afterClose="onHandleAfterCloseDialogQtd"
+            id="QtdDialog"
 			title="Leitura de Pacotes por Quantidade"
 			draggable="true">
 		<content>
