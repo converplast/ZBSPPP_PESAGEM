@@ -1,3 +1,4 @@
+/* eslint-disable */
 jQuery.sap.require("agile.pesagembobina.js.mask.mask");
 jQuery.sap.require("agile.pesagembobina.js.mask.maskMoney");
 
