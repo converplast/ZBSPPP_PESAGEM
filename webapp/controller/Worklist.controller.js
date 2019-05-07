@@ -157,7 +157,7 @@ sap.ui.define([
                 .forEach( sDialogId => {
                     let oDialog = sap.ui.getCore().byId(sDialogId);
                     if (oDialog)
-                        oDialog.destroy()
+                        oDialog.destroy(true);
                 });
         },
 
@@ -1531,9 +1531,6 @@ sap.ui.define([
 
 			if (!this._oDialogCodBarras) {
                 this._oDialogCodBarras = sap.ui.xmlfragment("agile.pesagembobina.view.CodBarrasDialog", this);
-            }
-            else{
-                this._oDialogCodBarras = sap.ui.getCore().byId('CodBarrasDialog')
             }
 
 			this._oDialogCodBarras.setModel(this.getView().getModel());

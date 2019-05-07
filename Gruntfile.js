@@ -64,7 +64,7 @@ module.exports = function(grunt) {
         watch: {
             all:{
                 files: ["webapp/**/*"],
-                tasks: ["clean:transp", "babel", "copy:transp"]
+                tasks: ["transp",]
             }
         },
 
