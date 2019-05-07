@@ -116,7 +116,8 @@ module.exports = function(grunt) {
         },
 
         exec: {
-            i18n_conv: "find transp/i18n/ -type f -exec native2ascii {} {} \\;"
+            i18n_conv: "find transp/i18n/ -type f -exec native2ascii {} {} \\;",
+            zip_dist: "cd dist && zip -r ../dist.zip ./",
         }
 
     });
@@ -142,7 +143,7 @@ module.exports = function(grunt) {
     //grunt.registerTask("mybabel", ["babel"]);
 
     // Build task
-    grunt.registerTask("build", ["transp", "clean:dist", "openui5_preload", "copy:dist"]);
+    grunt.registerTask("build", ["transp", "clean:dist", "openui5_preload", "copy:dist", "exec:zip_dist"]);
 
     grunt.registerTask("transp", ["clean:transp", "babel", "copy:transp", "exec:i18n_conv"]);
 
