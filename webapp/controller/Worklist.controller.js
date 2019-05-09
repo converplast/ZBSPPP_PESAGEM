@@ -28,7 +28,6 @@ sap.ui.define([
 	return BaseController.extend("agile.pesagembobina.controller.Worklist", {
 
 		formatter: formatter,
-	//debugger,
 		/* =========================================================== */
 		/* lifecycle methods                                           */
 		/* =========================================================== */
@@ -51,7 +50,6 @@ sap.ui.define([
 				shareSendEmailMessage: this.getResourceBundle().getText("shareSendEmailWorklistMessage", [location.href])
 			});
 			this.setModel(oViewModel, "worklistView");
-//debugger;
 			
 			this._oOrdem = function(){ return this.getView().byId("ordem"); };
 			this._oPallet = function(){ return this.getView().byId("pallet"); };
@@ -166,13 +164,11 @@ sap.ui.define([
 		},
 
 		/*onBack: function(){
-			debugger;
 		},*/
 
 		onHandleOpenPesagem: function () {
 
 			var that = this;
-			//debugger
 			if (this._sTpUnidadeMedida === "" || this._sTpUnidadeMedida === "KG") {
 
 				this._openLeituraCodBarras();
@@ -184,7 +180,6 @@ sap.ui.define([
 				this._oTimeoutPesoQtd = setInterval(function () {
 					that._lerPesoBalanca();
 				}, 1000);
-				//debugger
 			}
 
 		},
@@ -309,7 +304,6 @@ sap.ui.define([
 		},
 		//botao finalizar pacote qtd
 		handleFinalizarPacoteItemPesagemQtd: function () {
-			debugger
 			var sPeso = sap.ui.getCore().byId("txtPesoAtualQtd").getValue();
 			
 			var oBobinasTotalPacote = this.getView().getModel("bobinasTotalPacote");
@@ -531,8 +525,8 @@ sap.ui.define([
 								that._oDialogPesoPallet.close();
 							}
 							
-							this._oTara().setEnabled(false);
-							this._oTxtPesoPallet().setEnabled(true);
+							that._oTara().setEnabled(false);
+							that._oTxtPesoPallet().setEnabled(true);
 						}
 					}
 				});
@@ -558,7 +552,6 @@ sap.ui.define([
 						if (message) {
 							that.messageAlert(message);
 						} else {
-							debugger;
 							that._sOrdem = oDataPesagem.Aufnr;
 							that._sPallet = oDataPesagem.Pallet;
 							that._recuperarDadosOrdem(that._sOrdem, that._sPallet);
@@ -579,12 +572,11 @@ sap.ui.define([
 							if (that._oDialogPesoPallet) {
 								that._oDialogPesoPallet.close();
 							}
-							this._oTara().setEnabled(false);
-							this._oTxtPesoPallet().setEnabled(true);
+							that._oTara().setEnabled(false);
+							that._oTxtPesoPallet().setEnabled(true);
 						}
 					},
 					error: function (err) {
-						debugger;
 						//that.messageToastAlert(oError);
 						//Error Callback
 						jQuery.sap.require("sap.m.MessageBox");
@@ -801,7 +793,7 @@ sap.ui.define([
 				title: this.getResourceBundle().getText("titleConfirm"),
 				type: 'Message',
 				content: [
-					new Text('confirmAlertNovaPesagem', {
+					new Text({
 						text: this.getResourceBundle().getText("mesageConfirmNovaPesagem")
 					})
 				],
@@ -917,7 +909,6 @@ sap.ui.define([
 			if (sOrdem != "") {
 				aOrdem = sOrdem.split("#");
 
-//				debugger;
 
 				if (that._sOrdem === "") {
 					that._buscaDadosOrdem(aOrdem[1]);
@@ -1055,7 +1046,6 @@ sap.ui.define([
 
 		handleDialogCodBarrasCancelButton: function (oControlEvent) {
 			this._oDialogCodBarras.close();
-			//debugger;
 			var oModelHeaderPesagem = this.getView().getModel("headerPesagem");
 			if (oModelHeaderPesagem) {
 				var oModelHeaderPesagemData = oModelHeaderPesagem.getData();
@@ -1184,7 +1174,6 @@ sap.ui.define([
 
 			aFilters.push(new Filter("Aufnr", FilterOperator.EQ, this._oOrdem().getValue()));
 			aFilters.push(new Filter("Pallet", FilterOperator.EQ, this._sPallet));
-			debugger
 			oModel.read("/ZSTPP_PACKING_LIST_URLSet", {
 				filters: aFilters,
 				async: false,
@@ -1342,7 +1331,6 @@ sap.ui.define([
 			var sUrl = this.getUrlOdata();
 			var oModel = new sap.ui.model.odata.ODataModel(sUrl, true);
 			var that = this;
-			//debugger
 			oModel.read("/ZSTPP_PESAGEM_ETIQUETASet", {
 				filters: aFilter,
 				async: false,
@@ -1436,7 +1424,6 @@ sap.ui.define([
 							}
 						}
 					} else if (parseFloat(that._sPesoBalancaAtual) == 0) {
-						debugger;
 						if (that._oTxtPesoAtual()) {
 							that._oTxtPesoAtual().setValue(fTotalPesoKg.toFixed(3));
 							//that._oTxtPesoTotal().setValue(that._fPesoTotal.toFixed(3));
@@ -1446,7 +1433,6 @@ sap.ui.define([
 				});
 
 				oRequest.fail(function (jqXHR, textStatus) {
-					//debugger;
 					//alert( "Error: " + jqXHR.status + " " + jqXHR.statusText);
 
 				});
@@ -1483,7 +1469,7 @@ sap.ui.define([
 				this._oDialogQtd.setModel(this.getView().getModel("bobinasTotalPacote"),"bobinasTotalPacote");
 			}
 			catch(e){
-				debugger
+				console.error(e);
 			}
 			
 			
@@ -1629,6 +1615,8 @@ sap.ui.define([
 		},
 
 		_limpaCamposTela: function () {
+            this._sEfetivada = '';
+
 			var oHeaderPesagem = new HeaderPesagem();
 			var oItensPesagem = new ItensPesagem();
 
@@ -1704,7 +1692,6 @@ sap.ui.define([
 					if (message) {
 						that.messageAlert(message);
 					} else {
-						debugger;
 						that._sOrdem = oDataPesagem.Aufnr;
 						that._sPallet = oDataPesagem.Pallet;
 						that._recuperarDadosOrdem(that._sOrdem, that._sPallet);
@@ -1728,7 +1715,6 @@ sap.ui.define([
 					}
 				},
 				error: function (err) {
-					debugger;
 					//that.messageToastAlert(oError);
 					//Error Callback
 					that._sOrdem = err.response.headers.aufnr;
@@ -1773,7 +1759,6 @@ sap.ui.define([
 					that._sPesoPallet = oDataPesagem.results[0].Peso_Pallet;
 					that._sNre = oDataPesagem.results[0].Nre;
 					that._sDescNre = oDataPesagem.results[0].DescNre;
-					debugger;
 
 					if (that._sOrdem === "" && that._sMsg === "") {
 						that.messageAlert(that.getResourceBundle().getText("alertNenhumResultado"));
@@ -1819,7 +1804,6 @@ sap.ui.define([
 				filters: filter,
 				async: false,
 				success: function (oDataPesagem, oResponsePesagem) {
-					debugger;
 					that._sOrdem = oDataPesagem.results[0].Aufnr;
 					that._sPallet = oDataPesagem.results[0].Pallet;
 					that._sEfetivada = oDataPesagem.results[0].Efetivada;
@@ -1876,7 +1860,6 @@ sap.ui.define([
 					that._sNre = oDataPesagem.results[0].Nre;
 					that._sDescNre = oDataPesagem.results[0].DescNre;
 					that._sTicketOrigem = oDataPesagem.results[0].TicketOrigem;
-					debugger;
 					if (that._sOrdem === "" && that._sMsg === "") {
 						that.messageAlert(that.getResourceBundle().getText("alertNenhumResultado"));
 					} else if (that._sMsg) {
@@ -1897,7 +1880,6 @@ sap.ui.define([
 			var filter = [];
 			var that = this;
 
-			//debugger;
 
 			filter.push(new Filter("Aufnr", FilterOperator.EQ, sOrdem));
 			filter.push(new Filter("Pallet", FilterOperator.EQ, sPallet));
@@ -1935,7 +1917,6 @@ sap.ui.define([
 			} else {
 				filter.push(new Filter("Aufnr", FilterOperator.EQ, sOrdem));
 				filter.push(new Filter("Tara", FilterOperator.EQ, fTara));
-				//debugger;
 				that.setBusy();
 				oModel.read("/ZSTPP_PESAG_CABSet", {
 					filters: filter,
@@ -1950,7 +1931,6 @@ sap.ui.define([
 						that._sTotPacotes = oDataPesagem.results[0].Max_linhas;//leitura total de pacotes
 						that._sTpUnidadeMedida = oDataPesagem.results[0].Gmein;
 						//that._sNlenr = oDataPesagem.results[0].Nlenr;
-						//debugger;
 						if (oDataPesagem.results[0].Pallet === "") {
 							that.messageAlert(that.getResourceBundle().getText("messageOrdemInvalida"));
 							that._limpaCamposTela();
@@ -1994,7 +1974,6 @@ sap.ui.define([
 					//tratamento de erros
 				error: function(oResponse){
 					that.setFree();
-					debugger;
 					try {
 					
 					var m = oResponse.response.body;
@@ -2035,7 +2014,6 @@ sap.ui.define([
 			var sSequencia;
 			var aFilterEtiqueta = [];
 			
-			//debugger;
 			if (this._oTxtPesoAtual()) {
 				var fPesoAtual = this._oTxtPesoAtual().getValue();
 
@@ -2061,7 +2039,6 @@ sap.ui.define([
 			aFilter.push(new Filter("Pallet", FilterOperator.EQ, sPallet));
 
 			var oModelItensPesagemCache = this.getView().getModel("itensPesagemCache");
-			//debugger;
 			if (oModelItensPesagemCache) {
 				var dataItensPesagem = oModelItensPesagemCache.getData()[0];
 				//fPesoBruto = dataItensPesagem.PesoBruto;
@@ -2097,13 +2074,11 @@ sap.ui.define([
 			
 			
 			this.setBusy();
-			debugger;
 			oModel.read("/ZSTPP_PESAG_ITEMSet", {
 				filters: aFilter,
 				async: false,
 				success: function (oDataPesagem, oResponsePesagem) {
 					that.setFree();
-					//debugger;
 					if (oDataPesagem.results.length > 0) {
 						//that._oTara().setEnabled(false);
 						that._oBtnRedefinirTara().setVisible(true);
@@ -2117,7 +2092,6 @@ sap.ui.define([
 						that._oBtnFormularioA4().setVisible(false);
 						that._oBtnFichaPallet().setVisible(false);
 						that._oBtnImprimirEtiquetas().setVisible(true);
-						//debugger;
 						$.each(oDataPesagem.results, function (index, item) {
 							aItensPesagem.push(new ItensPesagem(item));
 							sRepetirChamada = item.RepetirChamada;
@@ -2137,18 +2111,14 @@ sap.ui.define([
 							//aFilterEtiqueta.push(new Filter("Sequencia", FilterOperator.EQ, sSequencia));
 
 						});
-						//debugger;
 						if (sSobrepesoBobina != "") {
-							debugger;
 							that.messageAlert(that.getResourceBundle().getText("messageSobrepeso"));
 						}
 						if (sSobrepesoOP != "") {
-							debugger;
 
 							that.messageAlert(that.getResourceBundle().getText("messageSobrepesoOP"));
 						}
 						
-						debugger
 						if (sRepetirChamada === "") {
 
 							that.getView().setModel(null, "itensPesagemCache");
@@ -2186,7 +2156,6 @@ sap.ui.define([
 							
 							} else {//regras para unidade de medida diferente de kg	
 								
-								debugger
 								//preenche variaveis globais
 								that._sOrdemQtd = sOrdem;
 								that._sPalletQtd = sPallet;
@@ -2265,7 +2234,6 @@ sap.ui.define([
 				//tratamento de erros
 				error: function(oResponse){
 					
-					debugger;
 					that.setFree();
 					try {
 					
@@ -2285,7 +2253,6 @@ sap.ui.define([
 		},
 		
 		handleSalvarQtd: function () {
-			debugger
 			var that = this;
 			that._prepararSalvarItemPesagem(that._aItensPesagem, that._sOrdemQtd, that._sPalletQtd, that._fQtdeBobinasTotalQtd, that._fTaraTotalQtd, that._fQuantQtd, that._sPesoTotalQtd);
 			try {
@@ -2357,7 +2324,6 @@ sap.ui.define([
 			
 			//verifica se tem quantidade para salvar - janela de qtd
 			if (fQuant !== undefined) {
-				//debugger
 				this._sColunaQtdTotal = parseFloat(this._sColunaQtdTotal) + parseFloat(fQuant);
 				fQuantTotal = this._sColunaQtdTotal;
 				aFilter.push(new Filter("Quant", FilterOperator.EQ, fQuant));
@@ -2365,12 +2331,10 @@ sap.ui.define([
 			}
 			
 
-			//debugger;
 			oModel.read("/ZSTPP_PESAG_ITEMSALVARSet", {
 				filters: aFilter,
 				async: false,
 				success: function (oDataPesagem, oResponsePesagem) {
-					//debugger;
 					if (oDataPesagem.results.length > 0) {
 						//that._oTara().setEnabled(false);
 						that._oBtnRedefinirTara().setVisible(true);
