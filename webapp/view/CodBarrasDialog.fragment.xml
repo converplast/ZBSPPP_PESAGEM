@@ -68,7 +68,7 @@
 		                    	<f:FormContainer>
 			            	  		  <f:FormElement label="Ativar balança">
 			                            <f:fields>
-			                              <Switch id="swtTipoPesagem" state="true" customTextOn="Sim" customTextOff="Não" change="onChangeSwitchCodBarras" />
+			                              <Switch id="swtTipoPesagem" state="{view>/leituraAutomatica}" customTextOn="Sim" customTextOff="Não" change="onChangeSwitchCodBarras" />
 			                            </f:fields>
 			                          </f:FormElement>
 		                    	</f:FormContainer>

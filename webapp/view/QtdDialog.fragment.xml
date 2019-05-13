@@ -87,7 +87,7 @@
 		                    	<f:FormContainer>
 			            	  		  <f:FormElement label="Leitura automática">
 			                            <f:fields>
-			                              <Switch id="swtTipoPesagemQtd" state="true" customTextOn="Sim" customTextOff="Não" change="onChangeSwitchCodBarrasQtd" />
+			                              <Switch id="swtTipoPesagemQtd" state="{view>/leituraAutomatica}" customTextOn="Sim" customTextOff="Não" change="onChangeSwitchCodBarrasQtd" />
 			                            </f:fields>
 			                          </f:FormElement>
 		                    	</f:FormContainer>

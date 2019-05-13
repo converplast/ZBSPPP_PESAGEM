@@ -42,6 +42,12 @@ sap.ui.define([
 
 			var that = this;
 			// Model used to manipulate control states
+
+			oViewModel = new JSONModel({
+				leituraAutomatica: true,
+			});
+			this.setModel(oViewModel, "view");
+
 			oViewModel = new JSONModel({
 				worklistTableTitle: this.getResourceBundle().getText("worklistTableTitle"),
 				saveAsTileTitle: this.getResourceBundle().getText("saveAsTileTitle", this.getResourceBundle().getText("worklistViewTitle")),
@@ -453,6 +459,7 @@ sap.ui.define([
 			}
 
 			this._oDialogPesoPallet.setModel(this.getView().getModel("headerPesagem"), "headerPesagem");
+			this._oDialogPesoPallet.setModel(this.getView().getModel("view"), "view");
 
 			this._oDialogPesoPallet.open();
 
@@ -914,8 +921,7 @@ sap.ui.define([
 					that._buscaDadosOrdem(aOrdem[1]);
 				} else {
 					if ((that._sOrdem === aOrdem[1]) || (aOrdem[1] === "")) {
-						var vSwitch = sap.ui.getCore().byId("swtTipoPesagem");
-						var valorSwitch = vSwitch.getState();
+                        var valorSwitch = this.getModel('view').getProperty('/leituraAutomatica');
 						var vPesoAtual = this._oTxtPesoAtual().getValue();
 
 						if (valorSwitch === false && (vPesoAtual === "" || vPesoAtual == 0)) {
@@ -1387,8 +1393,7 @@ sap.ui.define([
 		},
 
 		_lerPesoBalanca: function () {
-			var vSwitch = sap.ui.getCore().byId("swtTipoPesagem");
-			var valorSwitch = vSwitch.getState();
+			var valorSwitch = this.getModel('view').getProperty('/leituraAutomatica');
 			var that = this;
 			var fTotalPesoKg = 0
 				//				return;
@@ -1467,6 +1472,7 @@ sap.ui.define([
 			try {
 				this._oDialogQtd.setModel(this.getView().getModel("headerPesagem"),"headerPesagem");
 				this._oDialogQtd.setModel(this.getView().getModel("bobinasTotalPacote"),"bobinasTotalPacote");
+				this._oDialogQtd.setModel(this.getView().getModel("view"),"view");
 			}
 			catch(e){
 				console.error(e);
@@ -1486,8 +1492,7 @@ sap.ui.define([
 
 		onChangeSwitchCodBarras: function () {
 
-			var vSwitch = sap.ui.getCore().byId("swtTipoPesagem");
-			var valorSwitch = vSwitch.getState();
+			var valorSwitch = this.getModel('view').getProperty('/leituraAutomatica');
 
 			if (valorSwitch === true) {
 				this._oTxtPesoAtual().setEnabled(false);
@@ -1500,8 +1505,7 @@ sap.ui.define([
 
 		onChangeSwitchCodBarrasQtd: function () {
 
-			var vSwitch = sap.ui.getCore().byId("swtTipoPesagemQtd");
-			var valorSwitch = vSwitch.getState();
+			var valorSwitch = this.getModel('view').getProperty('/leituraAutomatica');
 
 			if (valorSwitch === true) {
 				this._oTxtPesoAtual().setEnabled(false);
@@ -1520,6 +1524,7 @@ sap.ui.define([
             }
 
 			this._oDialogCodBarras.setModel(this.getView().getModel());
+            this._oDialogCodBarras.setModel(this.getView().getModel("view"),"view");
 			// toggle compact style
 			jQuery.sap.syncStyleClass("sapUiSizeCompact", this.getView(), this._oDialog);
 			this._oDialogCodBarras.open();
