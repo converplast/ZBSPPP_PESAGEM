@@ -1400,7 +1400,7 @@ sap.ui.define([
 				var oRequest = $.ajax({
 					//url: "http://localhost/interfaceBalanca/balanca/LerPeso/TOLEDO 4800,E,7,2;1;6/2",
 					//url: "http://localhost:55982/balanca/LerPeso/TOLEDO 4800,E,7,2;1;6/2",
-					url: "https://localhost:443/interfaceBalanca/balanca/LerPeso/TOLEDO 4800,E,7,2;1;6/1",
+					url: "http://localhost/interfaceBalanca/balanca/LerPeso/TOLEDO 4800,E,7,2;1;6/1",
 					method: "POST"
 						//crossDomain: false,
 						//headers: {'X-Requested-With': 'XMLHttpRequest'},
