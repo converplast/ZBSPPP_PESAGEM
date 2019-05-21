@@ -20,9 +20,10 @@ sap.ui.define([
 	//"sap/ui/table/Table",
 	//"sap/ui/table/Column",
 	'sap/m/Label',
+    'sap/m/MessageBox',
 	'sap/m/Text'
 ], function (BaseController, JSONModel, formatter, Filter, FilterOperator, Button, Dialog, Input, HeaderPesagem, ItensPesagem,
-	TotaisPesagem, BobinasTotalPacote,/*PrinterHandler, ZebraHandler,*/ Label, Text) {
+	TotaisPesagem, BobinasTotalPacote,/*PrinterHandler, ZebraHandler,*/ Label, MessageBox, Text) {
 	"use strict";
 
 	return BaseController.extend("agile.pesagembobina.controller.Worklist", {
@@ -630,6 +631,10 @@ sap.ui.define([
 			oModel.read("/ZSTPP_PESAG_PESTOTSet", {
 				filters: aFilter,
 				async: false,
+                error: oError => {
+                    let oBody = JSON.parse(oError.response.body);
+                    MessageBox.error(`${oBody.error.code}: "${oBody.error.message.value}"`);
+                },
 				success: function (oDataPesagem, oResponsePesagem) {
 
 					that.messageToastAlert(that.getResourceBundle().getText("labelAlertPesTot"));
