@@ -138,9 +138,7 @@ sap.ui.define([
 
 		onAfterRendering: function () {
 			var that = this;
-			this._oTimeoutPeso = setInterval(function () {
-				that._lerPesoBalanca();
-			}, 1000);
+            that._lerPesoBalanca();
 			if (!this._sEfetivada) {
 				this._openLeituraCodBarras();
 			}
@@ -179,15 +177,14 @@ sap.ui.define([
 			if (this._sTpUnidadeMedida === "" || this._sTpUnidadeMedida === "KG") {
 
 				this._openLeituraCodBarras();
-				this._oTimeoutPeso = setInterval(function () {
-					that._lerPesoBalanca();
-				}, 1000);
 			} else {
 				this._openLeituraQuantidade();
-				this._oTimeoutPesoQtd = setInterval(function () {
-					that._lerPesoBalanca();
-				}, 1000);
 			}
+
+			if (!this.bPesagemJaAberta){
+                this._lerPesoBalanca();
+                this.bPesagemJaAberta = true;
+            }
 
 		},
 
@@ -1411,7 +1408,7 @@ sap.ui.define([
 					//url: "http://localhost/interfaceBalanca/balanca/LerPeso/TOLEDO 4800,E,7,2;1;6/2",
 					//url: "http://localhost:55982/balanca/LerPeso/TOLEDO 4800,E,7,2;1;6/2",
 					url: "http://localhost/interfaceBalanca/balanca/LerPeso/TOLEDO 4800,E,7,2;1;6/1",
-					method: "POST"
+					method: "GET"
 						//crossDomain: false,
 						//headers: {'X-Requested-With': 'XMLHttpRequest'},
 						//async: false
@@ -1419,9 +1416,19 @@ sap.ui.define([
 
 				oRequest.done(function (retorno) {
 
-					that._sPesoBalancaAtual = parseFloat(retorno);
+                    that._lerPesoBalanca();
 
-					if (parseFloat(that._sPesoBalancaAtual) > 0) {
+					var fPesoBalanca = parseFloat(retorno);
+
+                    // Paliativo pela oscilação.
+                    if (fPesoBalanca < 1){
+                        console.warn(`Valor ${fPesoBalanca} retornado pelo serviço da balança menor que 1.`)
+                        return;
+                    }
+
+					that._sPesoBalancaAtual = fPesoBalanca;
+
+					if (that._sPesoBalancaAtual > 0) {
 						fTotalPesoKg = that._sPesoBalancaAtual / 100;
 
 						if (fTotalPesoKg < 1000 && fTotalPesoKg != 0) {
@@ -1433,18 +1440,13 @@ sap.ui.define([
 								//that._oTxtPesoTotal().setValue(that._fPesoTotal.toFixed(3));
 							}
 						}
-					} else if (parseFloat(that._sPesoBalancaAtual) == 0) {
-						if (that._oTxtPesoAtual()) {
-							that._oTxtPesoAtual().setValue(fTotalPesoKg.toFixed(3));
-							//that._oTxtPesoTotal().setValue(that._fPesoTotal.toFixed(3));
-						}
 					}
 
 				});
 
 				oRequest.fail(function (jqXHR, textStatus) {
 					//alert( "Error: " + jqXHR.status + " " + jqXHR.statusText);
-
+                    that._lerPesoBalanca();
 				});
 			};
 		},
@@ -1501,6 +1503,7 @@ sap.ui.define([
 
 			if (valorSwitch === true) {
 				this._oTxtPesoAtual().setEnabled(false);
+                this._lerPesoBalanca();
 			} else {
 				this._oTxtPesoAtual().setValue("");
 				this._sPesoBalancaAtual = "";
@@ -1960,9 +1963,7 @@ sap.ui.define([
 						} else {
 							that._oDialogCodBarras.close();
 							that._openLeituraQuantidade();
-							that._oTimeoutPesoQtd = setInterval(function () {
-								that._lerPesoBalanca();
-							}, 1000);
+                            that._lerPesoBalanca();
 							that._oTara().setEnabled(true);
 							//that._oBtnRedefinirTara().setEnabled(true);
 							//ADD CASSIO - VERIFICAR DE COLOCAR A BUSCA POR ITENS NESSE PONTO
