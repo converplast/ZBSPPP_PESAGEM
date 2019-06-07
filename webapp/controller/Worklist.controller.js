@@ -1418,6 +1418,9 @@ sap.ui.define([
 
                     that._lerPesoBalanca();
 
+                    if (!that.getModel('view').getProperty('/leituraAutomatica'))
+                        return;
+
 					var fPesoBalanca = parseFloat(retorno);
 
                     // Paliativo pela oscilação.
