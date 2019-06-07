@@ -1424,7 +1424,7 @@ sap.ui.define([
 					var fPesoBalanca = parseFloat(retorno);
 
                     // Paliativo pela oscilação.
-                    if (fPesoBalanca < 1){
+                    if (fPesoBalanca < 100){
                         console.warn(`Valor ${fPesoBalanca} retornado pelo serviço da balança menor que 1.`)
                         return;
                     }
