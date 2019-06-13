@@ -1407,8 +1407,8 @@ sap.ui.define([
 				var oRequest = $.ajax({
 					//url: "http://localhost/interfaceBalanca/balanca/LerPeso/TOLEDO 4800,E,7,2;1;6/2",
 					//url: "http://localhost:55982/balanca/LerPeso/TOLEDO 4800,E,7,2;1;6/2",
-					url: "http://localhost/interfaceBalanca/balanca/LerPeso/TOLEDO 4800,E,7,2;1;6/1",
-					method: "GET"
+					url: "http://localhost/interfaceBalanca/balanca/LerPeso/",
+					method: "POST"
 						//crossDomain: false,
 						//headers: {'X-Requested-With': 'XMLHttpRequest'},
 						//async: false
@@ -1421,29 +1421,18 @@ sap.ui.define([
                     if (!that.getModel('view').getProperty('/leituraAutomatica'))
                         return;
 
-					var fPesoBalanca = parseFloat(retorno);
-
-                    // Paliativo pela oscilação.
-                    if (fPesoBalanca < 100){
-                        console.warn(`Valor ${fPesoBalanca} retornado pelo serviço da balança menor que 1.`)
-                        return;
-                    }
+					var fPesoBalanca = parseFloat(retorno.replace(',','.'));
 
 					that._sPesoBalancaAtual = fPesoBalanca;
 
-					if (that._sPesoBalancaAtual > 0) {
-						fTotalPesoKg = that._sPesoBalancaAtual / 100;
+                    fTotalPesoKg = that._sPesoBalancaAtual;
 
-						if (fTotalPesoKg < 1000 && fTotalPesoKg != 0) {
+                    that._fPesoTotal += fTotalPesoKg;
 
-							that._fPesoTotal += fTotalPesoKg;
-
-							if (that._oTxtPesoAtual()) {
-								that._oTxtPesoAtual().setValue(fTotalPesoKg.toFixed(3));
-								//that._oTxtPesoTotal().setValue(that._fPesoTotal.toFixed(3));
-							}
-						}
-					}
+                    if (that._oTxtPesoAtual()) {
+                        that._oTxtPesoAtual().setValue(fTotalPesoKg.toFixed(3));
+                        //that._oTxtPesoTotal().setValue(that._fPesoTotal.toFixed(3));
+                    }
 
 				});
 

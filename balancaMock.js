@@ -1,14 +1,14 @@
 /* eslint-disable */
 function randomExecTime(){
-    return parseInt(Math.random()*3000);
+    return (Math.random()*40).toFixed(3);
 }
 
 var http = require("http");
 http.createServer(function (req, res) {
   setTimeout(function(){
       res.writeHead(200, {"Content-Type": "text/html"});
-      res.writeHead(200, {"Access-Control-Allow-Origin": "*"});
-      res.write(""+randomExecTime());
+      res.writeHead(200, {"Access-Control-Allow-Origin": "*", "Access-Control-Allow-Headers": "*"});
+      res.write((""+randomExecTime()).replace('.',','));
       res.end();
   },randomExecTime());
-}).listen(60000);
+}).listen(60000, 'localhost');
